@@ -1,50 +1,2269 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- SEO -->
-    <!-- Fonts -->
-    <!-- Icons -->
-    <!-- CSS -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ALI FX | Global Trading</title>
+
+<meta name="description"
+content="ALI FX — Explore global financial markets through a modern trading experience.">
+
+<style>
+/* =========================================================
+   ALI FX — SINGLE FILE WEBSITE
+   HTML + CSS + JAVASCRIPT
+   ========================================================= */
+
+:root {
+    --bg: #05080d;
+    --bg2: #09111b;
+    --card: #0c141e;
+    --card2: #101b27;
+    --border: #1d2b3a;
+
+    --white: #ffffff;
+    --text: #e9eef4;
+    --muted: #8e9cab;
+
+    --gold: #d6b36a;
+    --gold-light: #f0d18d;
+
+    --blue: #36b8ff;
+    --green: #4ed59b;
+
+    --max: 1180px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background:
+        radial-gradient(
+            circle at 80% 0%,
+            rgba(34, 95, 135, .22),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 0% 40%,
+            rgba(214, 179, 106, .06),
+            transparent 28%
+        ),
+        var(--bg);
+
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+.container {
+    width: min(92%, var(--max));
+    margin: auto;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+
+    background: rgba(5, 8, 13, .86);
+    backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.navbar {
+    height: 76px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: var(--gold);
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+
+    color: #c7d0da;
+    font-size: 14px;
+}
+
+.nav-links a {
+    transition: .25s;
+}
+
+.nav-links a:hover {
+    color: var(--gold);
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 20px;
+
+    border-radius: 8px;
+
+    border: 1px solid var(--border);
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    color: #07090c;
+    background: var(--gold);
+    border-color: var(--gold);
+}
+
+.btn-primary:hover {
+    background: var(--gold-light);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--white);
+}
+
+.mobile-menu {
+    display: none;
+
+    border: 0;
+    background: none;
+
+    color: white;
+
+    font-size: 28px;
+
+    cursor: pointer;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+    min-height: 100vh;
+
+    padding-top: 145px;
+    padding-bottom: 90px;
+
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+
+    align-items: center;
+
+    gap: 60px;
+}
+
+.eyebrow {
+    color: var(--gold);
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 3px;
+    text-transform: uppercase;
+
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-size: clamp(46px, 6vw, 78px);
+
+    line-height: 1.02;
+
+    letter-spacing: -4px;
+
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            var(--blue)
+        );
+
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero-text {
+    max-width: 650px;
+
+    color: var(--muted);
+
+    font-size: 18px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    margin-top: 32px;
+}
+
+/* =========================================================
+   MARKET TERMINAL
+   ========================================================= */
+
+.trading-terminal {
+    position: relative;
+
+    padding: 25px;
+
+    min-height: 390px;
+
+    border-radius: 22px;
+
+    border: 1px solid #253647;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(16, 31, 45, .96),
+            rgba(7, 11, 17, .96)
+        );
+
+    box-shadow:
+        0 35px 90px rgba(0,0,0,.4);
+}
+
+.terminal-header {
+    display: flex;
+    justify-content: space-between;
+
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid var(--border);
+
+    color: #8b98a7;
+
+    font-size: 11px;
+}
+
+.market-chart {
+    height: 210px;
+
+    display: flex;
+    align-items: end;
+
+    gap: 7px;
+
+    margin-top: 20px;
+
+    overflow: hidden;
+}
+
+.candle {
+    width: 8px;
+
+    border-radius: 4px 4px 0 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #52c9ff,
+            #185a7c
+        );
+}
+
+.terminal-info {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 20px;
+}
+
+.terminal-info small {
+    color: #83909f;
+}
+
+.price {
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.positive {
+    color: var(--green);
+}
+
+/* =========================================================
+   GENERAL SECTIONS
+   ========================================================= */
+
+section {
+    scroll-margin-top: 90px;
+}
+
+.section {
+    padding: 95px 0;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+    gap: 30px;
+
+    margin-bottom: 40px;
+}
+
+.section-header h2 {
+    font-size: 42px;
+
+    letter-spacing: -1.5px;
+}
+
+.section-header p {
+    max-width: 570px;
+
+    color: var(--muted);
+}
+
+/* =========================================================
+   MARKET CARDS
+   ========================================================= */
+
+.market-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+}
+
+.card {
+    padding: 26px;
+
+    background: rgba(12,20,30,.88);
+
+    border: 1px solid var(--border);
+
+    border-radius: 16px;
+
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+
+    border-color: #3a5065;
+}
+
+.card-icon {
+    font-size: 28px;
+
+    margin-bottom: 18px;
+}
+
+.card h3 {
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+.market-price {
+    margin-top: 20px;
+
+    font-size: 21px;
+
+    font-weight: 800;
+}
+
+/* =========================================================
+   WHY ALI FX
+   ========================================================= */
+
+.features {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.feature {
+    padding: 30px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #0d1721,
+            transparent
+        );
+
+    border-left: 2px solid var(--gold);
+
+    border-radius: 8px;
+}
+
+.feature h3 {
+    margin-bottom: 8px;
+}
+
+.feature p {
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+/* =========================================================
+   ACCOUNTS
+   ========================================================= */
+
+.accounts {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+}
+
+.account {
+    padding: 28px;
+
+    background: #0b1119;
+
+    border: 1px solid var(--border);
+
+    border-radius: 17px;
+}
+
+.account.featured {
+    border-color: var(--gold);
+
+    box-shadow:
+        0 0 40px rgba(214,179,106,.08);
+}
+
+.account-tag {
+    color: var(--gold);
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+}
+
+.account h3 {
+    font-size: 25px;
+
+    margin: 8px 0 20px;
+}
+
+.account ul {
+    list-style: none;
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    margin-bottom: 22px;
+}
+
+.account li {
+    padding: 8px 0;
+
+    border-bottom: 1px solid #18232f;
+}
+
+/* =========================================================
+   MT5
+   ========================================================= */
+
+.platform {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 55px;
+
+    align-items: center;
+}
+
+.platform h2 {
+    font-size: 42px;
+
+    line-height: 1.1;
+}
+
+.platform-text {
+    color: var(--muted);
+
+    margin: 18px 0 25px;
+}
+
+.platform-box {
+    padding: 42px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0d1924,
+            #080c12
+        );
+}
+
+.platform-box h3 {
+    font-size: 34px;
+}
+
+.platform-box p {
+    color: var(--muted);
+
+    margin: 12px 0 25px;
+}
+
+.platform-items {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+}
+
+.platform-item {
+    padding: 15px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+}
+
+/* =========================================================
+   STEPS
+   ========================================================= */
+
+.steps {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+.step-number {
+    width: 44px;
+    height: 44px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: #162331;
+
+    color: var(--gold);
+
+    font-weight: 800;
+
+    margin-bottom: 18px;
+}
+
+.step p {
+    color: var(--muted);
+
+    margin-top: 7px;
+
+    font-size: 14px;
+}
+
+/* =========================================================
+   EDUCATION
+   ========================================================= */
+
+.education-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+}
+
+/* =========================================================
+   FAQ
+   ========================================================= */
+
+.faq {
+    max-width: 850px;
+
+    margin: auto;
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--border);
+}
+
+.faq-question {
+    width: 100%;
+
+    padding: 22px 0;
+
+    background: none;
+
+    border: 0;
+
+    color: white;
+
+    text-align: left;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: space-between;
+}
+
+.faq-answer {
+    display: none;
+
+    padding: 0 0 20px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+.faq-item.active .faq-answer {
+    display: block;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(45deg);
+}
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+
+.contact {
+    display: grid;
+
+    grid-template-columns:
+        .8fr 1.2fr;
+
+    gap: 22px;
+}
+
+.contact-box,
+.contact-form {
+    padding: 32px;
+
+    border-radius: 18px;
+
+    border: 1px solid var(--border);
+
+    background: #0b1119;
+}
+
+.contact-box p {
+    color: var(--muted);
+
+    margin: 12px 0 24px;
+}
+
+.form-field {
+    width: 100%;
+
+    padding: 14px;
+
+    margin-bottom: 12px;
+
+    border-radius: 8px;
+
+    border: 1px solid #202e3d;
+
+    background: #070c12;
+
+    color: white;
+
+    outline: none;
+}
+
+.form-field:focus {
+    border-color: var(--blue);
+}
+
+textarea.form-field {
+    min-height: 130px;
+
+    resize: vertical;
+}
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.cta {
+    margin: 30px auto 90px;
+
+    padding: 60px 25px;
+
+    text-align: center;
+
+    border-radius: 22px;
+
+    border: 1px solid #27394a;
+
+    background:
+        linear-gradient(
+            120deg,
+            #111e2a,
+            #090e15
+        );
+}
+
+.cta h2 {
+    font-size: 42px;
+}
+
+.cta p {
+    color: var(--muted);
+
+    max-width: 650px;
+
+    margin: 10px auto 25px;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    border-top: 1px solid var(--border);
+
+    padding-top: 30px;
+}
+
+.risk-warning {
+    color: #657281;
+
+    font-size: 11px;
+
+    line-height: 1.8;
+
+    padding-bottom: 28px;
+}
+
+.footer-bottom {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 28px 0;
+
+    color: #7c8997;
+
+    font-size: 13px;
+}
+
+.footer-links {
+    display: flex;
+
+    gap: 18px;
+
+    flex-wrap: wrap;
+}
+
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+
+.reveal {
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    transition: .7s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width: 950px) {
+
+    .nav-links,
+    .nav-buttons {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .market-grid,
+    .accounts,
+    .education-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .features,
+    .steps {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .platform,
+    .contact {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 600px) {
+
+    .navbar {
+        height: 68px;
+    }
+
+    .hero {
+        padding-top: 115px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+
+        letter-spacing: -2.5px;
+    }
+
+    .section {
+        padding: 65px 0;
+    }
+
+    .section-header {
+        display: block;
+    }
+
+    .section-header h2,
+    .platform h2 {
+        font-size: 33px;
+
+        margin-bottom: 12px;
+    }
+
+    .market-grid,
+    .accounts,
+    .features,
+    .steps,
+    .education-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .platform-items {
+        grid-template-columns: 1fr;
+    }
+
+    .cta h2 {
+        font-size: 31px;
+    }
+
+    .footer-bottom {
+        display: block;
+    }
+
+    .footer-links {
+        margin-top: 15px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- HEADER -->
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-    <!-- HERO -->
+<header>
 
-    <!-- MARKETS -->
+<div class="container navbar">
 
-    <!-- WHY ALI FX -->
+<a href="#home" class="logo">
+    ALI <span>FX</span>
+</a>
 
-    <!-- ACCOUNTS -->
+<nav class="nav-links">
 
-    <!-- MT5 -->
+<a href="#about">About</a>
+<a href="#markets">Markets</a>
+<a href="#accounts">Accounts</a>
+<a href="#platform">MT5</a>
+<a href="#education">Education</a>
+<a href="#faq">FAQ</a>
+<a href="#contact">Contact</a>
 
-    <!-- TRADING CONDITIONS -->
+</nav>
 
-    <!-- DEPOSIT & WITHDRAWAL -->
+<div class="nav-buttons">
 
-    <!-- EDUCATION -->
+<a href="#contact" class="btn btn-outline">
+    Login
+</a>
 
-    <!-- HOW TO START -->
+<a href="#contact" class="btn btn-primary">
+    Open Account
+</a>
 
-    <!-- FAQ -->
+</div>
 
-    <!-- CONTACT -->
+<button class="mobile-menu" aria-label="Open menu">
+    ☰
+</button>
 
-    <!-- CTA -->
+</div>
 
-    <!-- FOOTER -->
+</header>
 
-    <script>
-        // Navigation
-        // Animations
-        // FAQ
-        // Mobile Menu
-        // Market UI
-    </script>
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<main>
+
+<section class="hero container" id="home">
+
+<div class="reveal">
+
+<div class="eyebrow">
+    Global Markets • Trading Technology
+</div>
+
+<h1>
+    Trade global markets with
+    <span>ALI FX.</span>
+</h1>
+
+<p class="hero-text">
+    Discover a modern trading experience designed around
+    global market access, powerful technology and
+    transparent information.
+</p>
+
+<div class="hero-buttons">
+
+<a href="#contact"
+   class="btn btn-primary">
+    Open an Account
+</a>
+
+<a href="#markets"
+   class="btn btn-outline">
+    Explore Markets →
+</a>
+
+</div>
+
+</div>
+
+
+<div class="trading-terminal reveal">
+
+<div class="terminal-header">
+
+<span>
+    ALI FX • MARKET VIEW
+</span>
+
+<span>
+    MARKET INTERFACE
+</span>
+
+</div>
+
+<div class="market-chart"
+     id="marketChart">
+</div>
+
+<div class="terminal-info">
+
+<div>
+
+<small>
+    XAU / USD
+</small>
+
+<div class="price">
+    4,2xx.xx
+</div>
+
+</div>
+
+<div class="positive">
+    ▲ Market View
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section class="section"
+         id="about">
+
+<div class="container">
+
+<div class="section-header reveal">
+
+<div>
+
+<div class="eyebrow">
+    About ALI FX
+</div>
+
+<h2>
+    Built for modern traders.
+</h2>
+
+</div>
+
+<p>
+    ALI FX is designed around a clean,
+    technology-focused trading experience
+    for clients exploring global financial markets.
+</p>
+
+</div>
+
+
+<div class="features">
+
+<div class="feature reveal">
+
+<h3>
+    Global Market Access
+</h3>
+
+<p>
+    Explore major financial market categories
+    through one streamlined interface.
+</p>
+
+</div>
+
+
+<div class="feature reveal">
+
+<h3>
+    Trading Technology
+</h3>
+
+<p>
+    A modern digital environment designed
+    for market analysis and trade management.
+</p>
+
+</div>
+
+
+<div class="feature reveal">
+
+<h3>
+    Client First
+</h3>
+
+<p>
+    Clear information, accessible support
+    and a straightforward experience.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     MARKETS
+===================================================== -->
+
+<section class="section"
+         id="markets">
+
+<div class="container">
+
+<div class="section-header">
+
+<div>
+
+<div class="eyebrow">
+    Markets
+</div>
+
+<h2>
+    Explore global opportunities.
+</h2>
+
+</div>
+
+<p>
+    Market categories below are part of the website
+    interface. Actual instruments, specifications
+    and availability must be confirmed before launch.
+</p>
+
+</div>
+
+
+<div class="market-grid">
+
+
+<div class="card reveal">
+
+<div class="card-icon">
+    FX
+</div>
+
+<h3>
+    Forex
+</h3>
+
+<p>
+    Major, minor and selected currency markets.
+</p>
+
+<div class="market-price">
+    FX Markets
+</div>
+
+</div>
+
+
+<div class="card reveal">
+
+<div class="card-icon">
+    ◆
+</div>
+
+<h3>
+    Gold & Metals
+</h3>
+
+<p>
+    Precious metals including gold markets.
+</p>
+
+<div class="market-price">
+    XAU / Metals
+</div>
+
+</div>
+
+
+<div class="card reveal">
+
+<div class="card-icon">
+    ◈
+</div>
+
+<h3>
+    Indices
+</h3>
+
+<p>
+    Selected global equity index markets.
+</p>
+
+<div class="market-price">
+    Global Indices
+</div>
+
+</div>
+
+
+<div class="card reveal">
+
+<div class="card-icon">
+    ◉
+</div>
+
+<h3>
+    Commodities
+</h3>
+
+<p>
+    Energy and selected commodity markets.
+</p>
+
+<div class="market-price">
+    Commodities
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ACCOUNTS
+===================================================== -->
+
+<section class="section"
+         id="accounts">
+
+<div class="container">
+
+<div class="section-header">
+
+<div>
+
+<div class="eyebrow">
+    Trading Accounts
+</div>
+
+<h2>
+    Choose your setup.
+</h2>
+
+</div>
+
+<p>
+    These are website placeholders.
+    Replace all account specifications with
+    ALI FX's verified commercial terms.
+</p>
+
+</div>
+
+
+<div class="accounts">
+
+
+<div class="account reveal">
+
+<span class="account-tag">
+    Starter
+</span>
+
+<h3>
+    Standard
+</h3>
+
+<ul>
+
+<li>Flexible account setup</li>
+<li>Multiple instruments</li>
+<li>Platform access</li>
+<li>Client support</li>
+
+</ul>
+
+<a href="#contact"
+   class="btn btn-outline">
+    Learn More
+</a>
+
+</div>
+
+
+<div class="account featured reveal">
+
+<span class="account-tag">
+    Popular
+</span>
+
+<h3>
+    ECN
+</h3>
+
+<ul>
+
+<li>Professional conditions</li>
+<li>Market access</li>
+<li>Platform access</li>
+<li>Support</li>
+
+</ul>
+
+<a href="#contact"
+   class="btn btn-primary">
+    Learn More
+</a>
+
+</div>
+
+
+<div class="account reveal">
+
+<span class="account-tag">
+    Advanced
+</span>
+
+<h3>
+    Professional
+</h3>
+
+<ul>
+
+<li>Advanced setup</li>
+<li>Multiple instruments</li>
+<li>Trading platform</li>
+<li>Dedicated support</li>
+
+</ul>
+
+<a href="#contact"
+   class="btn btn-outline">
+    Learn More
+</a>
+
+</div>
+
+
+<div class="account reveal">
+
+<span class="account-tag">
+    Swap-Free Option
+</span>
+
+<h3>
+    Islamic
+</h3>
+
+<ul>
+
+<li>Swap-free option*</li>
+<li>Account verification</li>
+<li>Platform access</li>
+<li>Client support</li>
+
+</ul>
+
+<a href="#contact"
+   class="btn btn-outline">
+    Learn More
+</a>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     MT5
+===================================================== -->
+
+<section class="section"
+         id="platform">
+
+<div class="container platform">
+
+<div class="reveal">
+
+<div class="eyebrow">
+    Trading Platform
+</div>
+
+<h2>
+    Trade with MetaTrader 5.
+</h2>
+
+<p class="platform-text">
+    MT5 provides a familiar environment for charting,
+    market analysis and trade management.
+</p>
+
+<a href="#contact"
+   class="btn btn-primary">
+    Get Started
+</a>
+
+</div>
+
+
+<div class="platform-box reveal">
+
+<div class="card-icon">
+    ▦
+</div>
+
+<h3>
+    MT5
+</h3>
+
+<p>
+    Connect ALI FX's official MT5 download
+    and login links here when available.
+</p>
+
+
+<div class="platform-items">
+
+<div class="platform-item">
+    <b>Desktop</b>
+    <br>
+    <small>Windows / Mac</small>
+</div>
+
+<div class="platform-item">
+    <b>Mobile</b>
+    <br>
+    <small>iOS / Android</small>
+</div>
+
+<div class="platform-item">
+    <b>Web</b>
+    <br>
+    <small>Browser</small>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     EDUCATION
+===================================================== -->
+
+<section class="section"
+         id="education">
+
+<div class="container">
+
+<div class="section-header">
+
+<div>
+
+<div class="eyebrow">
+    Education
+</div>
+
+<h2>
+    Learn. Analyse. Improve.
+</h2>
+
+</div>
+
+<p>
+    Build market knowledge and develop
+    disciplined trading habits.
+</p>
+
+</div>
+
+
+<div class="education-grid">
+
+
+<div class="card reveal">
+
+<div class="card-icon">
+    01
+</div>
+
+<h3>
+    Market Basics
+</h3>
+
+<p>
+    Learn financial market terminology,
+    instruments and trading concepts.
+</p>
+
+</div>
+
+
+<div class="card reveal">
+
+<div class="card-icon">
+    02
+</div>
+
+<h3>
+    Technical Analysis
+</h3>
+
+<p>
+    Study charts, trends and price-action
+    concepts.
+</p>
+
+</div>
+
+
+<div class="card reveal">
+
+<div class="card-icon">
+    03
+</div>
+
+<h3>
+    Market Analysis
+</h3>
+
+<p>
+    Understand economic events and
+    market-moving factors.
+</p>
+
+</div>
+
+
+<div class="card reveal">
+
+<div class="card-icon">
+    04
+</div>
+
+<h3>
+    Risk Management
+</h3>
+
+<p>
+    Learn position sizing and disciplined
+    risk-management principles.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     HOW TO START
+===================================================== -->
+
+<section class="section">
+
+<div class="container">
+
+<div class="section-header">
+
+<div>
+
+<div class="eyebrow">
+    Getting Started
+</div>
+
+<h2>
+    Start in four steps.
+</h2>
+
+</div>
+
+</div>
+
+
+<div class="steps">
+
+
+<div class="step reveal">
+
+<div class="step-number">
+    01
+</div>
+
+<h3>
+    Create Account
+</h3>
+
+<p>
+    Submit your registration information.
+</p>
+
+</div>
+
+
+<div class="step reveal">
+
+<div class="step-number">
+    02
+</div>
+
+<h3>
+    Verify
+</h3>
+
+<p>
+    Complete applicable identity
+    verification requirements.
+</p>
+
+</div>
+
+
+<div class="step reveal">
+
+<div class="step-number">
+    03
+</div>
+
+<h3>
+    Fund
+</h3>
+
+<p>
+    Use an approved funding method.
+</p>
+
+</div>
+
+
+<div class="step reveal">
+
+<div class="step-number">
+    04
+</div>
+
+<h3>
+    Trade
+</h3>
+
+<p>
+    Access available markets and
+    manage your risk.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     FAQ
+===================================================== -->
+
+<section class="section"
+         id="faq">
+
+<div class="container">
+
+<div class="section-header">
+
+<div>
+
+<div class="eyebrow">
+    FAQ
+</div>
+
+<h2>
+    Frequently asked questions.
+</h2>
+
+</div>
+
+</div>
+
+
+<div class="faq">
+
+
+<div class="faq-item">
+
+<button class="faq-question">
+
+<span>
+    What is ALI FX?
+</span>
+
+<span class="faq-icon">
+    +
+</span>
+
+</button>
+
+<div class="faq-answer">
+
+ALI FX is presented through this website
+as a trading and financial-technology brand.
+Replace this description with your verified
+legal company information before launch.
+
+</div>
+
+</div>
+
+
+<div class="faq-item">
+
+<button class="faq-question">
+
+<span>
+    Which markets are available?
+</span>
+
+<span class="faq-icon">
+    +
+</span>
+
+</button>
+
+<div class="faq-answer">
+
+The website supports market categories
+including Forex, Metals, Indices and
+Commodities. Only publish instruments
+actually offered by ALI FX.
+
+</div>
+
+</div>
+
+
+<div class="faq-item">
+
+<button class="faq-question">
+
+<span>
+    How do I open an account?
+</span>
+
+<span class="faq-icon">
+    +
+</span>
+
+</button>
+
+<div class="faq-answer">
+
+Use the Open Account process and complete
+the applicable registration and verification
+requirements.
+
+</div>
+
+</div>
+
+
+<div class="faq-item">
+
+<button class="faq-question">
+
+<span>
+    Is trading risk-free?
+</span>
+
+<span class="faq-icon">
+    +
+</span>
+
+</button>
+
+<div class="faq-answer">
+
+No. Leveraged financial trading involves
+significant risk. Losses can occur and
+nothing on this website is a guarantee
+of profit.
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     CONTACT
+===================================================== -->
+
+<section class="section"
+         id="contact">
+
+<div class="container">
+
+<div class="section-header">
+
+<div>
+
+<div class="eyebrow">
+    Contact
+</div>
+
+<h2>
+    Let's talk.
+</h2>
+
+</div>
+
+<p>
+    Connect this form to your official
+    backend or email service before launch.
+</p>
+
+</div>
+
+
+<div class="contact">
+
+
+<div class="contact-box reveal">
+
+<h3>
+    ALI FX
+</h3>
+
+<p>
+    Global Markets & Trading Technology
+</p>
+
+<p>
+    <b>Email</b>
+    <br>
+    support@alifx.com
+</p>
+
+<p>
+    <b>Office</b>
+    <br>
+    Your official business address
+</p>
+
+<a href="mailto:support@alifx.com"
+   class="btn btn-primary">
+    Email ALI FX
+</a>
+
+</div>
+
+
+<form class="contact-form reveal"
+      id="contactForm">
+
+<input
+    class="form-field"
+    type="text"
+    placeholder="Full Name"
+    required
+>
+
+<input
+    class="form-field"
+    type="email"
+    placeholder="Email Address"
+    required
+>
+
+<input
+    class="form-field"
+    type="tel"
+    placeholder="Phone Number"
+>
+
+<textarea
+    class="form-field"
+    placeholder="How can we help?"
+></textarea>
+
+<button
+    type="submit"
+    class="btn btn-primary">
+
+Send Message
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<div class="container">
+
+<div class="cta reveal">
+
+<div class="eyebrow">
+    Start Your Journey
+</div>
+
+<h2>
+    Ready to explore global markets?
+</h2>
+
+<p>
+    Discover the ALI FX trading experience.
+</p>
+
+<a href="#contact"
+   class="btn btn-primary">
+    Open an Account
+</a>
+
+</div>
+
+</div>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+<div class="container">
+
+<div class="risk-warning">
+
+<strong>
+    Risk Warning:
+</strong>
+
+Trading leveraged financial products
+carries a high level of risk and may not
+be suitable for all investors. You may
+lose money. Past performance does not
+guarantee future results.
+
+<br><br>
+
+This website template contains placeholder
+commercial, regulatory and company information.
+Before publication, replace all placeholders
+with ALI FX's verified legal entity details,
+licensing information where applicable,
+trading conditions, payment methods,
+official address and applicable policies.
+
+<br><br>
+
+*Availability of Islamic accounts, instruments,
+platforms, leverage, spreads and other services
+is subject to the actual terms and conditions
+of ALI FX.
+
+</div>
+
+
+<div class="footer-bottom">
+
+<div>
+    © <span id="year"></span> ALI FX.
+    All Rights Reserved.
+</div>
+
+<div class="footer-links">
+
+<a href="#">
+    Privacy Policy
+</a>
+
+<a href="#">
+    Terms & Conditions
+</a>
+
+<a href="#">
+    Risk Disclosure
+</a>
+
+<a href="#">
+    KYC / AML
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+/* ---------------------------------------------------------
+   Fake visual market chart
+--------------------------------------------------------- */
+
+const chart =
+    document.getElementById("marketChart");
+
+for (let i = 0; i < 38; i++) {
+
+    const candle =
+        document.createElement("div");
+
+    candle.className = "candle";
+
+    candle.style.height =
+        (40 + Math.random() * 145) + "px";
+
+    chart.appendChild(candle);
+}
+
+
+/* ---------------------------------------------------------
+   FAQ
+--------------------------------------------------------- */
+
+document
+.querySelectorAll(".faq-question")
+.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const item =
+            button.parentElement;
+
+        item.classList.toggle("active");
+
+    });
+
+});
+
+
+/* ---------------------------------------------------------
+   Mobile menu
+--------------------------------------------------------- */
+
+const menu =
+    document.querySelector(".mobile-menu");
+
+const nav =
+    document.querySelector(".nav-links");
+
+menu.addEventListener("click", () => {
+
+    if (nav.style.display === "flex") {
+
+        nav.style.display = "none";
+
+    } else {
+
+        nav.style.display = "flex";
+
+        nav.style.position = "absolute";
+
+        nav.style.top = "68px";
+
+        nav.style.left = "0";
+
+        nav.style.right = "0";
+
+        nav.style.padding = "20px";
+
+        nav.style.flexDirection = "column";
+
+        nav.style.background = "#070b11";
+
+    }
+
+});
+
+
+/* ---------------------------------------------------------
+   Close mobile menu after clicking link
+--------------------------------------------------------- */
+
+document
+.querySelectorAll(".nav-links a")
+.forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        if (window.innerWidth <= 950) {
+
+            nav.style.display = "none";
+
+        }
+
+    });
+
+});
+
+
+/* ---------------------------------------------------------
+   Scroll reveal
+--------------------------------------------------------- */
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target
+                        .classList
+                        .add("visible");
+
+                }
+
+            });
+
+        },
+        {
+            threshold: .12
+        }
+    );
+
+
+document
+.querySelectorAll(".reveal")
+.forEach(element => {
+
+    observer.observe(element);
+
+});
+
+
+/* ---------------------------------------------------------
+   Contact demo form
+--------------------------------------------------------- */
+
+document
+.getElementById("contactForm")
+.addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    alert(
+        "Thank you. The ALI FX contact form is currently in demo mode. Connect it to your backend/email service before launch."
+    );
+
+    this.reset();
+
+});
+
+
+/* ---------------------------------------------------------
+   Current year
+--------------------------------------------------------- */
+
+document
+.getElementById("year")
+.textContent =
+    new Date().getFullYear();
+
+</script>
 
 </body>
 </html>
