@@ -488,13 +488,34 @@ section {
     border: 1px solid var(--border);
 
     border-radius: 17px;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+
+    position: relative;
 }
 
-.account.featured {
-    border-color: var(--gold);
+.account:hover {
+    border-color: #3a5065;
 
-    box-shadow:
-        0 0 40px rgba(214,179,106,.08);
+    transform: translateY(-4px);
+}
+
+.account.selected {
+    border-color: var(--gold) !important;
+
+    box-shadow: 0 0 25px rgba(214, 179, 106, 0.25) !important;
+
+    transform: translateY(-6px);
+
+    background: #101a26;
+}
+
+.account.selected .btn-select {
+    background: var(--gold);
+
+    color: #07090c;
 }
 
 .account-tag {
@@ -527,6 +548,10 @@ section {
     padding: 8px 0;
 
     border-bottom: 1px solid #18232f;
+}
+
+.account .btn-select {
+    width: 100%;
 }
 
 /* =========================================================
@@ -1317,9 +1342,7 @@ footer {
 </div>
 
 <p>
-    These are website placeholders.
-    Replace all account specifications with
-    ALI FX's verified commercial terms.
+    Select any account tier below to choose your trading setup.
 </p>
 
 </div>
@@ -1347,15 +1370,14 @@ footer {
 
 </ul>
 
-<a href="#contact"
-   class="btn btn-outline">
-    Learn More
-</a>
+<button class="btn btn-outline btn-select">
+    Select Account
+</button>
 
 </div>
 
 
-<div class="account featured reveal">
+<div class="account selected reveal">
 
 <span class="account-tag">
     Popular
@@ -1374,10 +1396,9 @@ footer {
 
 </ul>
 
-<a href="#contact"
-   class="btn btn-primary">
-    Learn More
-</a>
+<button class="btn btn-outline btn-select">
+    Selected
+</button>
 
 </div>
 
@@ -1401,10 +1422,9 @@ footer {
 
 </ul>
 
-<a href="#contact"
-   class="btn btn-outline">
-    Learn More
-</a>
+<button class="btn btn-outline btn-select">
+    Select Account
+</button>
 
 </div>
 
@@ -1428,10 +1448,9 @@ footer {
 
 </ul>
 
-<a href="#contact"
-   class="btn btn-outline">
-    Learn More
-</a>
+<button class="btn btn-outline btn-select">
+    Select Account
+</button>
 
 </div>
 
@@ -2117,6 +2136,27 @@ for (let i = 0; i < 38; i++) {
 
     chart.appendChild(candle);
 }
+
+
+/* ---------------------------------------------------------
+   Account Selection Switcher
+--------------------------------------------------------- */
+
+const accountCards = document.querySelectorAll(".accounts .account");
+
+accountCards.forEach(card => {
+    card.addEventListener("click", () => {
+        accountCards.forEach(c => {
+            c.classList.remove("selected");
+            const btn = c.querySelector(".btn-select");
+            if(btn) btn.textContent = "Select Account";
+        });
+
+        card.classList.add("selected");
+        const activeBtn = card.querySelector(".btn-select");
+        if(activeBtn) activeBtn.textContent = "Selected";
+    });
+});
 
 
 /* ---------------------------------------------------------
