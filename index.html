@@ -4,975 +4,801 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ALI FX | Global Trading</title>
+<title>ALI FX | Professional Trading Platform</title>
 
 <meta name="description"
-content="ALI FX — Explore global financial markets through a modern trading experience.">
+content="ALI FX - Professional trading education, market insights and trading platform.">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-/* =========================================================
-   ALI FX — SINGLE FILE WEBSITE
-   HTML + CSS + JAVASCRIPT
-   ========================================================= */
-
-:root {
-    --bg: #05080d;
-    --bg2: #09111b;
-    --card: #0c141e;
-    --card2: #101b27;
-    --border: #1d2b3a;
-
-    --white: #ffffff;
-    --text: #e9eef4;
-    --muted: #8e9cab;
-
-    --gold: #d6b36a;
-    --gold-light: #f0d18d;
-
-    --blue: #36b8ff;
-    --green: #4ed59b;
-
-    --max: 1180px;
+:root{
+    --bg:#050505;
+    --bg2:#0b0b0b;
+    --card:#101010;
+    --card2:#151515;
+    --gold:#d4af37;
+    --gold2:#f3d77a;
+    --white:#ffffff;
+    --muted:#999999;
+    --border:rgba(212,175,55,.22);
+    --danger:#ef4444;
+    --success:#22c55e;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html{
+    scroll-behavior:smooth;
 }
 
-body {
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--white);
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button,
+input,
+select,
+textarea{
+    font-family:inherit;
+}
+
+.container{
+    width:min(1180px,92%);
+    margin:auto;
+}
+
+/* ================= NAVBAR ================= */
+
+.header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:9999;
+    background:rgba(5,5,5,.96);
+    border-bottom:1px solid var(--border);
+    backdrop-filter:blur(15px);
+}
+
+.header-inner{
+    height:76px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:25px;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:900;
+    letter-spacing:1px;
+    white-space:nowrap;
+}
+
+.logo span{
+    color:var(--gold);
+}
+
+.nav{
+    display:flex;
+    align-items:center;
+    gap:22px;
+}
+
+.nav a{
+    color:#ddd;
+    font-size:14px;
+    transition:.25s;
+}
+
+.nav a:hover{
+    color:var(--gold);
+}
+
+.nav-btn{
+    padding:11px 18px;
+    border:1px solid var(--gold);
+    color:var(--gold)!important;
+    border-radius:5px;
+}
+
+.nav-btn:hover{
+    background:var(--gold);
+    color:#000!important;
+}
+
+.open-account{
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:#000!important;
+    padding:12px 20px;
+    border-radius:5px;
+    font-weight:800;
+}
+
+.open-account:hover{
+    opacity:.9;
+}
+
+.mobile-menu{
+    display:none;
+    font-size:27px;
+    cursor:pointer;
+    color:var(--gold);
+}
+
+.mobile-nav{
+    display:none;
+    position:absolute;
+    top:76px;
+    left:0;
+    width:100%;
+    background:#080808;
+    border-bottom:1px solid var(--border);
+    padding:15px 5%;
+}
+
+.mobile-nav.open{
+    display:block;
+}
+
+.mobile-nav a{
+    display:block;
+    padding:13px 0;
+    border-bottom:1px solid #222;
+    color:#ddd;
+}
+
+.mobile-nav .mobile-open{
+    margin-top:12px;
+    text-align:center;
+    background:var(--gold);
+    color:#000;
+    padding:12px;
+    border-radius:5px;
+    font-weight:800;
+}
+
+/* ================= SCREENS ================= */
+
+.screen{
+    display:none;
+    min-height:100vh;
+}
+
+.screen.active{
+    display:block;
+}
+
+#homeScreen{
+    padding-top:76px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:650px;
+    display:flex;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
     background:
-        radial-gradient(
-            circle at 80% 0%,
-            rgba(34, 95, 135, .22),
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at 0% 40%,
-            rgba(214, 179, 106, .06),
-            transparent 28%
-        ),
-        var(--bg);
-
-    color: var(--text);
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.6;
+        radial-gradient(circle at 75% 30%,rgba(212,175,55,.14),transparent 30%),
+        radial-gradient(circle at 20% 70%,rgba(212,175,55,.06),transparent 25%);
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
+.hero-content{
+    max-width:760px;
+    padding:80px 0;
 }
 
-img {
-    max-width: 100%;
+.badge{
+    display:inline-block;
+    border:1px solid var(--border);
+    color:var(--gold2);
+    padding:7px 13px;
+    border-radius:30px;
+    font-size:12px;
+    margin-bottom:22px;
+    text-transform:uppercase;
+    letter-spacing:1px;
 }
 
-.container {
-    width: min(92%, var(--max));
-    margin: auto;
+.hero h1{
+    font-size:clamp(42px,6vw,76px);
+    line-height:1.05;
+    margin-bottom:22px;
 }
 
-/* =========================================================
-   HEADER
-   ========================================================= */
-
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-
-    background: rgba(5, 8, 13, .86);
-    backdrop-filter: blur(18px);
-
-    border-bottom: 1px solid rgba(255,255,255,.07);
+.hero h1 span{
+    color:var(--gold);
 }
 
-.navbar {
-    height: 76px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.hero p{
+    color:#aaa;
+    font-size:18px;
+    max-width:650px;
+    margin-bottom:30px;
 }
 
-.logo {
-    font-size: 25px;
-    font-weight: 900;
-    letter-spacing: 2px;
+.hero-buttons{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
 }
 
-.logo span {
-    color: var(--gold);
+.btn{
+    border:0;
+    padding:14px 24px;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:800;
+    font-size:14px;
+    transition:.25s;
 }
 
-.nav-links {
-    display: flex;
-    gap: 25px;
-    align-items: center;
-
-    color: #c7d0da;
-    font-size: 14px;
+.btn-gold{
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:#000;
 }
 
-.nav-links a {
-    transition: .25s;
+.btn-gold:hover{
+    transform:translateY(-2px);
 }
 
-.nav-links a:hover {
-    color: var(--gold);
+.btn-outline{
+    background:transparent;
+    color:var(--gold);
+    border:1px solid var(--gold);
 }
 
-.nav-buttons {
-    display: flex;
-    gap: 10px;
+.btn-outline:hover{
+    background:var(--gold);
+    color:#000;
 }
 
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+/* ================= SECTIONS ================= */
 
-    padding: 12px 20px;
-
-    border-radius: 8px;
-
-    border: 1px solid var(--border);
-
-    font-size: 14px;
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition: .25s;
+.section{
+    padding:90px 0;
 }
 
-.btn:hover {
-    transform: translateY(-2px);
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
 }
 
-.btn-primary {
-    color: #07090c;
-    background: var(--gold);
-    border-color: var(--gold);
+.section-title h2{
+    font-size:38px;
+    margin-bottom:10px;
 }
 
-.btn-primary:hover {
-    background: var(--gold-light);
+.section-title span{
+    color:var(--gold);
 }
 
-.btn-outline {
-    background: transparent;
-    color: var(--white);
+.section-title p{
+    color:var(--muted);
 }
 
-.mobile-menu {
-    display: none;
+/* ================= CARDS ================= */
 
-    border: 0;
-    background: none;
-
-    color: white;
-
-    font-size: 28px;
-
-    cursor: pointer;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
 }
 
-/* =========================================================
-   HERO
-   ========================================================= */
-
-.hero {
-    min-height: 100vh;
-
-    padding-top: 145px;
-    padding-bottom: 90px;
-
-    display: grid;
-    grid-template-columns: 1.1fr .9fr;
-
-    align-items: center;
-
-    gap: 60px;
+.card{
+    background:linear-gradient(145deg,#111,#090909);
+    border:1px solid var(--border);
+    padding:28px;
+    border-radius:10px;
+    transition:.3s;
 }
 
-.eyebrow {
-    color: var(--gold);
-
-    font-size: 12px;
-    font-weight: 800;
-
-    letter-spacing: 3px;
-    text-transform: uppercase;
-
-    margin-bottom: 18px;
+.card:hover{
+    transform:translateY(-5px);
+    border-color:rgba(212,175,55,.55);
 }
 
-.hero h1 {
-    font-size: clamp(46px, 6vw, 78px);
-
-    line-height: 1.02;
-
-    letter-spacing: -4px;
-
-    margin-bottom: 25px;
+.card-icon{
+    width:48px;
+    height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:8px;
+    background:rgba(212,175,55,.1);
+    color:var(--gold);
+    font-size:23px;
+    margin-bottom:18px;
 }
 
-.hero h1 span {
+.card h3{
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#999;
+    font-size:14px;
+}
+
+/* ================= MARKETS ================= */
+
+.market-table{
+    width:100%;
+    border-collapse:collapse;
+    background:#0d0d0d;
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.market-table th,
+.market-table td{
+    padding:17px;
+    border-bottom:1px solid #222;
+    text-align:left;
+}
+
+.market-table th{
+    color:var(--gold);
+    font-size:13px;
+}
+
+.market-table td{
+    color:#ddd;
+}
+
+.up{
+    color:var(--success);
+}
+
+.down{
+    color:var(--danger);
+}
+
+/* ================= ACCOUNT ================= */
+
+.price{
+    font-size:34px;
+    font-weight:900;
+    color:var(--gold);
+    margin:15px 0;
+}
+
+.card ul{
+    list-style:none;
+    margin:20px 0;
+}
+
+.card li{
+    padding:8px 0;
+    border-bottom:1px solid #202020;
+    color:#aaa;
+    font-size:14px;
+}
+
+/* ================= CHART ================= */
+
+.chart-box{
+    background:#0d0d0d;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:25px;
+}
+
+.chart-container{
+    height:420px;
+}
+
+/* ================= FAQ ================= */
+
+.faq{
+    max-width:850px;
+    margin:auto;
+}
+
+.faq-item{
+    border:1px solid #252525;
+    margin-bottom:12px;
+    border-radius:7px;
+    overflow:hidden;
+}
+
+.faq-question{
+    padding:18px;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    background:#0d0d0d;
+}
+
+.faq-answer{
+    display:none;
+    padding:18px;
+    color:#999;
+    background:#090909;
+}
+
+.faq-item.open .faq-answer{
+    display:block;
+}
+
+/* ================= CONTACT ================= */
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.form-group{
+    margin-bottom:16px;
+}
+
+.form-group label{
+    display:block;
+    color:#aaa;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    background:#090909;
+    border:1px solid #292929;
+    color:#fff;
+    padding:13px;
+    border-radius:5px;
+    outline:none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:var(--gold);
+}
+
+/* ================= AUTH ================= */
+
+.auth-screen{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:100px 20px 40px;
     background:
-        linear-gradient(
-            90deg,
-            #ffffff,
-            var(--blue)
-        );
-
-    -webkit-background-clip: text;
-    color: transparent;
-}
-
-.hero-text {
-    max-width: 650px;
-
-    color: var(--muted);
-
-    font-size: 18px;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 12px;
-
-    flex-wrap: wrap;
-
-    margin-top: 32px;
-}
-
-/* =========================================================
-   MARKET TERMINAL
-   ========================================================= */
-
-.trading-terminal {
-    position: relative;
-
-    padding: 25px;
-
-    min-height: 390px;
-
-    border-radius: 22px;
-
-    border: 1px solid #253647;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(16, 31, 45, .96),
-            rgba(7, 11, 17, .96)
-        );
-
-    box-shadow:
-        0 35px 90px rgba(0,0,0,.4);
-}
-
-.terminal-header {
-    display: flex;
-    justify-content: space-between;
-
-    padding-bottom: 15px;
-
-    border-bottom: 1px solid var(--border);
-
-    color: #8b98a7;
-
-    font-size: 11px;
-}
-
-.market-chart {
-    height: 210px;
-
-    display: flex;
-    align-items: end;
-
-    gap: 7px;
-
-    margin-top: 20px;
-
-    overflow: hidden;
-}
-
-.candle {
-    width: 8px;
-
-    border-radius: 4px 4px 0 0;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #52c9ff,
-            #185a7c
-        );
-}
-
-.terminal-info {
-    display: flex;
-    justify-content: space-between;
-
-    margin-top: 20px;
-}
-
-.terminal-info small {
-    color: #83909f;
-}
-
-.price {
-    font-size: 25px;
-    font-weight: 800;
-}
-
-.positive {
-    color: var(--green);
-}
-
-/* =========================================================
-   GENERAL SECTIONS
-   ========================================================= */
-
-section {
-    scroll-margin-top: 90px;
-}
-
-.section {
-    padding: 95px 0;
-}
-
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-
-    gap: 30px;
-
-    margin-bottom: 40px;
-}
-
-.section-header h2 {
-    font-size: 42px;
-
-    letter-spacing: -1.5px;
-}
-
-.section-header p {
-    max-width: 570px;
-
-    color: var(--muted);
-}
-
-/* =========================================================
-   MARKET CARDS
-   ========================================================= */
-
-.market-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 16px;
-}
-
-.card {
-    padding: 26px;
-
-    background: rgba(12,20,30,.88);
-
-    border: 1px solid var(--border);
-
-    border-radius: 16px;
-
-    transition: .3s;
-}
-
-.card:hover {
-    transform: translateY(-6px);
-
-    border-color: #3a5065;
-}
-
-.card-icon {
-    font-size: 28px;
-
-    margin-bottom: 18px;
-}
-
-.card h3 {
-    margin-bottom: 8px;
-}
-
-.card p {
-    color: var(--muted);
-
-    font-size: 14px;
-}
-
-.market-price {
-    margin-top: 20px;
-
-    font-size: 21px;
-
-    font-weight: 800;
-}
-
-/* =========================================================
-   WHY ALI FX
-   ========================================================= */
-
-.features {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 18px;
-}
-
-.feature {
-    padding: 30px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #0d1721,
-            transparent
-        );
-
-    border-left: 2px solid var(--gold);
-
-    border-radius: 8px;
-}
-
-.feature h3 {
-    margin-bottom: 8px;
-}
-
-.feature p {
-    color: var(--muted);
-
-    font-size: 14px;
-}
-
-/* =========================================================
-   ACCOUNTS
-   ========================================================= */
-
-.accounts {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 16px;
-}
-
-.account {
-    padding: 28px;
-
-    background: #0b1119;
-
-    border: 1px solid var(--border);
-
-    border-radius: 17px;
-
-    cursor: pointer;
-
-    transition: all 0.3s ease;
-
-    position: relative;
-}
-
-.account:hover {
-    border-color: #3a5065;
-
-    transform: translateY(-4px);
-}
-
-.account.selected {
-    border-color: var(--gold) !important;
-
-    box-shadow: 0 0 25px rgba(214, 179, 106, 0.25) !important;
-
-    transform: translateY(-6px);
-
-    background: #101a26;
-}
-
-.account.selected .btn-select {
-    background: var(--gold);
-
-    color: #07090c;
-}
-
-.account-tag {
-    color: var(--gold);
-
-    font-size: 11px;
-
-    text-transform: uppercase;
-
-    letter-spacing: 2px;
-}
-
-.account h3 {
-    font-size: 25px;
-
-    margin: 8px 0 20px;
-}
-
-.account ul {
-    list-style: none;
-
-    color: var(--muted);
-
-    font-size: 14px;
-
-    margin-bottom: 22px;
+        radial-gradient(circle at center,rgba(212,175,55,.08),transparent 35%);
 }
 
-.account li {
-    padding: 8px 0;
-
-    border-bottom: 1px solid #18232f;
+.auth-card{
+    width:min(470px,100%);
+    background:#0d0d0d;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:35px;
 }
 
-.account .btn-select {
-    width: 100%;
+.auth-logo{
+    text-align:center;
+    font-size:28px;
+    font-weight:900;
+    margin-bottom:25px;
 }
-
-/* =========================================================
-   MT5
-   ========================================================= */
-
-.platform {
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap: 55px;
 
-    align-items: center;
+.auth-logo span{
+    color:var(--gold);
 }
 
-.platform h2 {
-    font-size: 42px;
-
-    line-height: 1.1;
+.auth-card h2{
+    text-align:center;
+    margin-bottom:7px;
 }
 
-.platform-text {
-    color: var(--muted);
-
-    margin: 18px 0 25px;
+.auth-card .subtitle{
+    color:#888;
+    text-align:center;
+    margin-bottom:25px;
+    font-size:14px;
 }
-
-.platform-box {
-    padding: 42px;
 
-    border: 1px solid var(--border);
-
-    border-radius: 20px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #0d1924,
-            #080c12
-        );
+.auth-footer{
+    text-align:center;
+    margin-top:20px;
+    color:#888;
+    font-size:13px;
 }
 
-.platform-box h3 {
-    font-size: 34px;
+.auth-footer button{
+    background:none;
+    border:0;
+    color:var(--gold);
+    cursor:pointer;
 }
 
-.platform-box p {
-    color: var(--muted);
+/* ================= DASHBOARD ================= */
 
-    margin: 12px 0 25px;
+.dashboard{
+    min-height:100vh;
+    padding-top:76px;
+    background:#070707;
 }
-
-.platform-items {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
 
-    gap: 12px;
+.dashboard-nav{
+    position:fixed;
+    top:76px;
+    left:0;
+    width:100%;
+    z-index:1000;
+    background:#0b0b0b;
+    border-bottom:1px solid var(--border);
 }
 
-.platform-item {
-    padding: 15px;
-
-    border: 1px solid var(--border);
-
-    border-radius: 10px;
+.dashboard-nav-inner{
+    min-height:62px;
+    display:flex;
+    align-items:center;
+    gap:22px;
+    overflow-x:auto;
+    white-space:nowrap;
 }
-
-/* =========================================================
-   STEPS
-   ========================================================= */
 
-.steps {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 18px;
+.dashboard-nav a,
+.dashboard-nav button{
+    color:#aaa;
+    background:none;
+    border:0;
+    cursor:pointer;
+    font-size:13px;
 }
-
-.step-number {
-    width: 44px;
-    height: 44px;
-
-    display: grid;
-    place-items: center;
 
-    border-radius: 50%;
-
-    background: #162331;
-
-    color: var(--gold);
-
-    font-weight: 800;
-
-    margin-bottom: 18px;
+.dashboard-nav a:hover,
+.dashboard-nav button:hover{
+    color:var(--gold);
 }
-
-.step p {
-    color: var(--muted);
 
-    margin-top: 7px;
-
-    font-size: 14px;
+.dashboard-nav .logout{
+    color:#ef4444;
 }
-
-/* =========================================================
-   EDUCATION
-   ========================================================= */
 
-.education-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 16px;
+.dashboard-content{
+    padding-top:80px;
+    padding-bottom:50px;
 }
-
-/* =========================================================
-   FAQ
-   ========================================================= */
 
-.faq {
-    max-width: 850px;
-
-    margin: auto;
+.dashboard-title{
+    margin-bottom:25px;
 }
 
-.faq-item {
-    border-bottom: 1px solid var(--border);
+.dashboard-title h1{
+    font-size:32px;
 }
-
-.faq-question {
-    width: 100%;
-
-    padding: 22px 0;
-
-    background: none;
-
-    border: 0;
-
-    color: white;
-
-    text-align: left;
-
-    font-size: 16px;
-
-    font-weight: 700;
-
-    cursor: pointer;
 
-    display: flex;
-
-    justify-content: space-between;
+.dashboard-title p{
+    color:#888;
 }
-
-.faq-answer {
-    display: none;
-
-    padding: 0 0 20px;
 
-    color: var(--muted);
-
-    font-size: 14px;
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:30px;
 }
 
-.faq-item.active .faq-answer {
-    display: block;
+.stat-card{
+    background:#101010;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:22px;
 }
 
-.faq-item.active .faq-icon {
-    transform: rotate(45deg);
+.stat-card p{
+    color:#888;
+    font-size:13px;
 }
-
-/* =========================================================
-   CONTACT
-   ========================================================= */
-
-.contact {
-    display: grid;
-
-    grid-template-columns:
-        .8fr 1.2fr;
 
-    gap: 22px;
+.stat-card h2{
+    color:var(--gold);
+    margin-top:8px;
 }
 
-.contact-box,
-.contact-form {
-    padding: 32px;
-
-    border-radius: 18px;
-
-    border: 1px solid var(--border);
-
-    background: #0b1119;
+.dashboard-panel{
+    background:#101010;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:25px;
+    margin-bottom:22px;
 }
 
-.contact-box p {
-    color: var(--muted);
-
-    margin: 12px 0 24px;
+.dashboard-panel h3{
+    margin-bottom:20px;
 }
-
-.form-field {
-    width: 100%;
-
-    padding: 14px;
-
-    margin-bottom: 12px;
 
-    border-radius: 8px;
-
-    border: 1px solid #202e3d;
-
-    background: #070c12;
-
-    color: white;
-
-    outline: none;
+.data-table{
+    width:100%;
+    border-collapse:collapse;
 }
 
-.form-field:focus {
-    border-color: var(--blue);
+.data-table th,
+.data-table td{
+    padding:13px;
+    border-bottom:1px solid #242424;
+    text-align:left;
+    font-size:13px;
 }
-
-textarea.form-field {
-    min-height: 130px;
 
-    resize: vertical;
+.data-table th{
+    color:var(--gold);
 }
-
-/* =========================================================
-   CTA
-   ========================================================= */
-
-.cta {
-    margin: 30px auto 90px;
 
-    padding: 60px 25px;
-
-    text-align: center;
-
-    border-radius: 22px;
-
-    border: 1px solid #27394a;
-
-    background:
-        linear-gradient(
-            120deg,
-            #111e2a,
-            #090e15
-        );
+.status{
+    display:inline-block;
+    padding:4px 9px;
+    border-radius:20px;
+    font-size:11px;
 }
 
-.cta h2 {
-    font-size: 42px;
+.status.active{
+    background:rgba(34,197,94,.12);
+    color:#22c55e;
 }
-
-.cta p {
-    color: var(--muted);
 
-    max-width: 650px;
-
-    margin: 10px auto 25px;
+.status.pending{
+    background:rgba(234,179,8,.12);
+    color:#eab308;
 }
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
 
-footer {
-    border-top: 1px solid var(--border);
-
-    padding-top: 30px;
+.status.rejected{
+    background:rgba(239,68,68,.12);
+    color:#ef4444;
 }
-
-.risk-warning {
-    color: #657281;
-
-    font-size: 11px;
 
-    line-height: 1.8;
+/* ================= FOOTER ================= */
 
-    padding-bottom: 28px;
+footer{
+    padding:50px 0 25px;
+    background:#050505;
+    border-top:1px solid var(--border);
 }
-
-.footer-bottom {
-    display: flex;
-
-    justify-content: space-between;
-
-    gap: 20px;
-
-    padding: 28px 0;
 
-    color: #7c8997;
-
-    font-size: 13px;
+.footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:35px;
 }
-
-.footer-links {
-    display: flex;
-
-    gap: 18px;
 
-    flex-wrap: wrap;
+.footer-col h4{
+    color:var(--gold);
+    margin-bottom:15px;
 }
 
-/* =========================================================
-   ANIMATION
-   ========================================================= */
-
-.reveal {
-    opacity: 0;
-
-    transform: translateY(20px);
-
-    transition: .7s ease;
+.footer-col p,
+.footer-col a{
+    color:#888;
+    font-size:13px;
+    display:block;
+    margin-bottom:8px;
 }
-
-.reveal.visible {
-    opacity: 1;
 
-    transform: translateY(0);
+.footer-bottom{
+    border-top:1px solid #202020;
+    margin-top:35px;
+    padding-top:20px;
+    color:#666;
+    font-size:12px;
+    text-align:center;
 }
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
+/* ================= RESPONSIVE ================= */
 
-@media(max-width: 950px) {
+@media(max-width:1000px){
 
-    .nav-links,
-    .nav-buttons {
-        display: none;
+    .nav{
+        display:none;
     }
 
-    .mobile-menu {
-        display: block;
+    .mobile-menu{
+        display:block;
     }
 
-    .hero {
-        grid-template-columns: 1fr;
+    .grid{
+        grid-template-columns:1fr 1fr;
     }
 
-    .market-grid,
-    .accounts,
-    .education-grid {
-        grid-template-columns: repeat(2,1fr);
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
     }
 
-    .features,
-    .steps {
-        grid-template-columns: repeat(2,1fr);
-    }
-
-    .platform,
-    .contact {
-        grid-template-columns: 1fr;
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
     }
 }
 
-@media(max-width: 600px) {
+@media(max-width:700px){
 
-    .navbar {
-        height: 68px;
+    .header-inner{
+        height:68px;
     }
 
-    .hero {
-        padding-top: 115px;
+    .mobile-nav{
+        top:68px;
     }
 
-    .hero h1 {
-        font-size: 48px;
-
-        letter-spacing: -2.5px;
+    #homeScreen{
+        padding-top:68px;
     }
 
-    .section {
-        padding: 65px 0;
+    .hero{
+        min-height:600px;
     }
 
-    .section-header {
-        display: block;
+    .hero h1{
+        font-size:43px;
     }
 
-    .section-header h2,
-    .platform h2 {
-        font-size: 33px;
-
-        margin-bottom: 12px;
+    .hero p{
+        font-size:15px;
     }
 
-    .market-grid,
-    .accounts,
-    .features,
-    .steps,
-    .education-grid {
-        grid-template-columns: 1fr;
+    .section{
+        padding:65px 0;
     }
 
-    .platform-items {
-        grid-template-columns: 1fr;
+    .section-title h2{
+        font-size:30px;
     }
 
-    .cta h2 {
-        font-size: 31px;
+    .grid,
+    .contact-grid,
+    .footer-grid,
+    .stats-grid{
+        grid-template-columns:1fr;
     }
 
-    .footer-bottom {
-        display: block;
+    .dashboard{
+        padding-top:68px;
     }
 
-    .footer-links {
-        margin-top: 15px;
+    .dashboard-nav{
+        top:68px;
+    }
+
+    .dashboard-content{
+        padding-top:75px;
+    }
+
+    .dashboard-nav-inner{
+        min-height:58px;
+        gap:18px;
+    }
+
+    .market-table{
+        display:block;
+        overflow-x:auto;
+    }
+
+    .chart-container{
+        height:300px;
+    }
+
+    .auth-card{
+        padding:25px 20px;
     }
 }
 </style>
@@ -980,208 +806,121 @@ footer {
 
 <body>
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+<!-- =========================================================
+MAIN NAVBAR
+========================================================= -->
 
-<header>
+<header class="header">
 
-<div class="container navbar">
+<div class="container header-inner">
 
-<a href="#home" class="logo">
+<a href="#" class="logo" onclick="goHome('home');return false;">
     ALI <span>FX</span>
 </a>
 
-<nav class="nav-links">
+<nav class="nav">
 
-<a href="#about">About</a>
-<a href="#markets">Markets</a>
-<a href="#accounts">Accounts</a>
-<a href="#platform">MT5</a>
-<a href="#education">Education</a>
-<a href="#faq">FAQ</a>
-<a href="#contact">Contact</a>
+<a href="#" onclick="goHome('home');return false;">Home</a>
+
+<a href="#" onclick="goHome('markets');return false;">Markets</a>
+
+<a href="#" onclick="goHome('accounts');return false;">Accounts</a>
+
+<a href="#" onclick="goHome('platforms');return false;">Platforms</a>
+
+<a href="#" onclick="goHome('tools');return false;">Tools</a>
+
+<a href="#" onclick="goHome('education');return false;">Education</a>
+
+<a href="#" onclick="goHome('contact');return false;">Contact</a>
+
+<a href="#" class="nav-btn"
+onclick="showScreen('loginScreen');return false;">
+Login
+</a>
+
+<a href="#" class="open-account"
+onclick="openRegister();return false;">
+Open Account
+</a>
 
 </nav>
 
-<div class="nav-buttons">
-
-<a href="#contact" class="btn btn-outline">
-    Login
-</a>
-
-<a href="#contact" class="btn btn-primary">
-    Open Account
-</a>
+<div class="mobile-menu" onclick="toggleMobileMenu()">
+☰
+</div>
 
 </div>
 
-<button class="mobile-menu" aria-label="Open menu">
-    ☰
-</button>
+<div class="mobile-nav" id="mobileNav">
+
+<a href="#" onclick="goHome('home');closeMobileMenu();return false;">Home</a>
+
+<a href="#" onclick="goHome('markets');closeMobileMenu();return false;">Markets</a>
+
+<a href="#" onclick="goHome('accounts');closeMobileMenu();return false;">Accounts</a>
+
+<a href="#" onclick="goHome('platforms');closeMobileMenu();return false;">Platforms</a>
+
+<a href="#" onclick="goHome('tools');closeMobileMenu();return false;">Tools</a>
+
+<a href="#" onclick="goHome('education');closeMobileMenu();return false;">Education</a>
+
+<a href="#" onclick="goHome('contact');closeMobileMenu();return false;">Contact</a>
+
+<a href="#" onclick="showScreen('loginScreen');closeMobileMenu();return false;">
+Login
+</a>
+
+<a href="#" class="mobile-open"
+onclick="openRegister();closeMobileMenu();return false;">
+Open Account
+</a>
 
 </div>
 
 </header>
 
 
-<!-- =====================================================
-     HERO
-===================================================== -->
+<!-- =========================================================
+HOME SCREEN
+========================================================= -->
 
-<main>
+<section id="homeScreen" class="screen active">
 
-<section class="hero container" id="home">
+<!-- HERO -->
 
-<div class="reveal">
+<section id="home" class="hero">
 
-<div class="eyebrow">
-    Global Markets • Trading Technology
+<div class="container">
+
+<div class="hero-content">
+
+<div class="badge">
+Professional Trading Platform
 </div>
 
 <h1>
-    Trade global markets with
-    <span>ALI FX.</span>
+Trade With <span>Confidence.</span><br>
+Build Your Edge.
 </h1>
 
-<p class="hero-text">
-    Discover a modern trading experience designed around
-    global market access, powerful technology and
-    transparent information.
+<p>
+ALI FX provides a professional environment for traders who want
+market knowledge, disciplined execution and structured trading.
 </p>
 
 <div class="hero-buttons">
 
-<a href="#contact"
-   class="btn btn-primary">
-    Open an Account
-</a>
+<button class="btn btn-gold"
+onclick="openRegister()">
+Open Trading Account
+</button>
 
-<a href="#markets"
-   class="btn btn-outline">
-    Explore Markets →
-</a>
-
-</div>
-
-</div>
-
-
-<div class="trading-terminal reveal">
-
-<div class="terminal-header">
-
-<span>
-    ALI FX • MARKET VIEW
-</span>
-
-<span>
-    MARKET INTERFACE
-</span>
-
-</div>
-
-<div class="market-chart"
-     id="marketChart">
-</div>
-
-<div class="terminal-info">
-
-<div>
-
-<small>
-    XAU / USD
-</small>
-
-<div class="price">
-    4,2xx.xx
-</div>
-
-</div>
-
-<div class="positive">
-    ▲ Market View
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     ABOUT
-===================================================== -->
-
-<section class="section"
-         id="about">
-
-<div class="container">
-
-<div class="section-header reveal">
-
-<div>
-
-<div class="eyebrow">
-    About ALI FX
-</div>
-
-<h2>
-    Built for modern traders.
-</h2>
-
-</div>
-
-<p>
-    ALI FX is designed around a clean,
-    technology-focused trading experience
-    for clients exploring global financial markets.
-</p>
-
-</div>
-
-
-<div class="features">
-
-<div class="feature reveal">
-
-<h3>
-    Global Market Access
-</h3>
-
-<p>
-    Explore major financial market categories
-    through one streamlined interface.
-</p>
-
-</div>
-
-
-<div class="feature reveal">
-
-<h3>
-    Trading Technology
-</h3>
-
-<p>
-    A modern digital environment designed
-    for market analysis and trade management.
-</p>
-
-</div>
-
-
-<div class="feature reveal">
-
-<h3>
-    Client First
-</h3>
-
-<p>
-    Clear information, accessible support
-    and a straightforward experience.
-</p>
+<button class="btn btn-outline"
+onclick="goHome('markets')">
+Explore Markets
+</button>
 
 </div>
 
@@ -1192,343 +931,161 @@ footer {
 </section>
 
 
-<!-- =====================================================
-     MARKETS
-===================================================== -->
+<!-- MARKETS -->
 
-<section class="section"
-         id="markets">
+<section id="markets" class="section">
 
 <div class="container">
 
-<div class="section-header">
+<div class="section-title">
 
-<div>
+<h2>Global <span>Markets</span></h2>
 
-<div class="eyebrow">
-    Markets
-</div>
-
-<h2>
-    Explore global opportunities.
-</h2>
+<p>Explore major financial markets from one platform.</p>
 
 </div>
 
-<p>
-    Market categories below are part of the website
-    interface. Actual instruments, specifications
-    and availability must be confirmed before launch.
-</p>
+<table class="market-table">
 
-</div>
+<thead>
 
+<tr>
+<th>Instrument</th>
+<th>Bid</th>
+<th>Ask</th>
+<th>Change</th>
+<th>Market</th>
+</tr>
 
-<div class="market-grid">
+</thead>
 
+<tbody>
 
-<div class="card reveal">
+<tr>
+<td>Gold / XAUUSD</td>
+<td>4,179.20</td>
+<td>4,179.80</td>
+<td class="up">+0.82%</td>
+<td>Open</td>
+</tr>
 
-<div class="card-icon">
-    FX
-</div>
+<tr>
+<td>EUR / USD</td>
+<td>1.1720</td>
+<td>1.1723</td>
+<td class="up">+0.21%</td>
+<td>Open</td>
+</tr>
 
-<h3>
-    Forex
-</h3>
+<tr>
+<td>GBP / USD</td>
+<td>1.3450</td>
+<td>1.3454</td>
+<td class="down">-0.18%</td>
+<td>Open</td>
+</tr>
 
-<p>
-    Major, minor and selected currency markets.
-</p>
+<tr>
+<td>BTC / USD</td>
+<td>123,450</td>
+<td>123,520</td>
+<td class="up">+1.15%</td>
+<td>Open</td>
+</tr>
 
-<div class="market-price">
-    FX Markets
-</div>
+</tbody>
 
-</div>
-
-
-<div class="card reveal">
-
-<div class="card-icon">
-    ◆
-</div>
-
-<h3>
-    Gold & Metals
-</h3>
-
-<p>
-    Precious metals including gold markets.
-</p>
-
-<div class="market-price">
-    XAU / Metals
-</div>
-
-</div>
-
-
-<div class="card reveal">
-
-<div class="card-icon">
-    ◈
-</div>
-
-<h3>
-    Indices
-</h3>
-
-<p>
-    Selected global equity index markets.
-</p>
-
-<div class="market-price">
-    Global Indices
-</div>
-
-</div>
-
-
-<div class="card reveal">
-
-<div class="card-icon">
-    ◉
-</div>
-
-<h3>
-    Commodities
-</h3>
-
-<p>
-    Energy and selected commodity markets.
-</p>
-
-<div class="market-price">
-    Commodities
-</div>
-
-</div>
-
-
-</div>
+</table>
 
 </div>
 
 </section>
 
 
-<!-- =====================================================
-     ACCOUNTS
-===================================================== -->
+<!-- ACCOUNTS -->
 
-<section class="section"
-         id="accounts">
+<section id="accounts" class="section">
 
 <div class="container">
 
-<div class="section-header">
+<div class="section-title">
 
-<div>
+<h2>Trading <span>Accounts</span></h2>
 
-<div class="eyebrow">
-    Trading Accounts
-</div>
-
-<h2>
-    Choose your setup.
-</h2>
+<p>Choose an account structure according to your trading requirements.</p>
 
 </div>
 
-<p>
-    Select any account tier below to choose your trading setup.
-</p>
+<div class="grid">
 
-</div>
+<div class="card">
 
+<h3>Standard</h3>
 
-<div class="accounts">
-
-
-<div class="account reveal">
-
-<span class="account-tag">
-    Starter
-</span>
-
-<h3>
-    Standard
-</h3>
+<div class="price">Standard</div>
 
 <ul>
 
-<li>Flexible account setup</li>
+<li>Professional trading environment</li>
 <li>Multiple instruments</li>
-<li>Platform access</li>
-<li>Client support</li>
+<li>Market analysis tools</li>
+<li>Trading education</li>
+<li>24/5 support</li>
 
 </ul>
 
-<button class="btn btn-outline btn-select">
-    Select Account
+<button class="btn btn-gold"
+onclick="openRegister('Standard')">
+Open Account
 </button>
 
 </div>
 
 
-<div class="account selected reveal">
+<div class="card">
 
-<span class="account-tag">
-    Popular
-</span>
+<h3>Professional</h3>
 
-<h3>
-    ECN
-</h3>
+<div class="price">Pro</div>
 
 <ul>
 
-<li>Professional conditions</li>
-<li>Market access</li>
-<li>Platform access</li>
-<li>Support</li>
+<li>Advanced trading environment</li>
+<li>Professional market tools</li>
+<li>Advanced analytics</li>
+<li>Priority support</li>
+<li>Structured trading resources</li>
 
 </ul>
 
-<button class="btn btn-outline btn-select">
-    Selected
+<button class="btn btn-gold"
+onclick="openRegister('Professional')">
+Open Account
 </button>
 
 </div>
 
 
-<div class="account reveal">
+<div class="card">
 
-<span class="account-tag">
-    Advanced
-</span>
+<h3>Institutional</h3>
 
-<h3>
-    Professional
-</h3>
+<div class="price">Custom</div>
 
 <ul>
 
-<li>Advanced setup</li>
-<li>Multiple instruments</li>
-<li>Trading platform</li>
+<li>Business solutions</li>
 <li>Dedicated support</li>
+<li>Custom requirements</li>
+<li>Professional infrastructure</li>
+<li>Institutional enquiries</li>
 
 </ul>
 
-<button class="btn btn-outline btn-select">
-    Select Account
+<button class="btn btn-outline"
+onclick="goHome('contact')">
+Contact Us
 </button>
-
-</div>
-
-
-<div class="account reveal">
-
-<span class="account-tag">
-    Swap-Free Option
-</span>
-
-<h3>
-    Islamic
-</h3>
-
-<ul>
-
-<li>Swap-free option*</li>
-<li>Account verification</li>
-<li>Platform access</li>
-<li>Client support</li>
-
-</ul>
-
-<button class="btn btn-outline btn-select">
-    Select Account
-</button>
-
-</div>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     MT5
-===================================================== -->
-
-<section class="section"
-         id="platform">
-
-<div class="container platform">
-
-<div class="reveal">
-
-<div class="eyebrow">
-    Trading Platform
-</div>
-
-<h2>
-    Trade with MetaTrader 5.
-</h2>
-
-<p class="platform-text">
-    MT5 provides a familiar environment for charting,
-    market analysis and trade management.
-</p>
-
-<a href="#contact"
-   class="btn btn-primary">
-    Get Started
-</a>
-
-</div>
-
-
-<div class="platform-box reveal">
-
-<div class="card-icon">
-    ▦
-</div>
-
-<h3>
-    MT5
-</h3>
-
-<p>
-    Connect ALI FX's official MT5 download
-    and login links here when available.
-</p>
-
-
-<div class="platform-items">
-
-<div class="platform-item">
-    <b>Desktop</b>
-    <br>
-    <small>Windows / Mac</small>
-</div>
-
-<div class="platform-item">
-    <b>Mobile</b>
-    <br>
-    <small>iOS / Android</small>
-</div>
-
-<div class="platform-item">
-    <b>Web</b>
-    <br>
-    <small>Browser</small>
-</div>
 
 </div>
 
@@ -1539,111 +1096,59 @@ footer {
 </section>
 
 
-<!-- =====================================================
-     EDUCATION
-===================================================== -->
+<!-- PLATFORMS -->
 
-<section class="section"
-         id="education">
+<section id="platforms" class="section">
 
 <div class="container">
 
-<div class="section-header">
+<div class="section-title">
 
-<div>
+<h2>Trading <span>Platforms</span></h2>
 
-<div class="eyebrow">
-    Education
-</div>
-
-<h2>
-    Learn. Analyse. Improve.
-</h2>
+<p>Technology designed to support your trading workflow.</p>
 
 </div>
+
+<div class="grid">
+
+<div class="card">
+
+<div class="card-icon">📈</div>
+
+<h3>Advanced Charts</h3>
 
 <p>
-    Build market knowledge and develop
-    disciplined trading habits.
+Analyze price action with professional charting and technical tools.
 </p>
 
 </div>
 
 
-<div class="education-grid">
+<div class="card">
 
+<div class="card-icon">⚡</div>
 
-<div class="card reveal">
-
-<div class="card-icon">
-    01
-</div>
-
-<h3>
-    Market Basics
-</h3>
+<h3>Fast Execution</h3>
 
 <p>
-    Learn financial market terminology,
-    instruments and trading concepts.
+Designed for traders who require efficient market access.
 </p>
 
 </div>
 
 
-<div class="card reveal">
+<div class="card">
 
-<div class="card-icon">
-    02
-</div>
+<div class="card-icon">🔐</div>
 
-<h3>
-    Technical Analysis
-</h3>
+<h3>Secure Access</h3>
 
 <p>
-    Study charts, trends and price-action
-    concepts.
+Account access is protected with modern authentication practices.
 </p>
 
 </div>
-
-
-<div class="card reveal">
-
-<div class="card-icon">
-    03
-</div>
-
-<h3>
-    Market Analysis
-</h3>
-
-<p>
-    Understand economic events and
-    market-moving factors.
-</p>
-
-</div>
-
-
-<div class="card reveal">
-
-<div class="card-icon">
-    04
-</div>
-
-<h3>
-    Risk Management
-</h3>
-
-<p>
-    Learn position sizing and disciplined
-    risk-management principles.
-</p>
-
-</div>
-
 
 </div>
 
@@ -1652,161 +1157,123 @@ footer {
 </section>
 
 
-<!-- =====================================================
-     HOW TO START
-===================================================== -->
+<!-- TOOLS -->
+
+<section id="tools" class="section">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>Trading <span>Tools</span></h2>
+
+<p>Useful tools for structured market analysis.</p>
+
+</div>
+
+<div class="chart-box">
+
+<h3 style="margin-bottom:20px;">
+Gold Market Chart — XAU/USD
+</h3>
+
+<div class="chart-container">
+
+<canvas id="goldChart"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- EDUCATION -->
+
+<section id="education" class="section">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>Trading <span>Education</span></h2>
+
+<p>Build knowledge before increasing complexity.</p>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<div class="card-icon">📚</div>
+
+<h3>Market Basics</h3>
+
+<p>
+Understand forex, commodities, indices and crypto markets.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="card-icon">🎯</div>
+
+<h3>Price Action</h3>
+
+<p>
+Learn structured chart analysis and market behaviour.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="card-icon">🛡️</div>
+
+<h3>Risk Management</h3>
+
+<p>
+Learn position sizing, risk control and disciplined execution.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FAQ -->
 
 <section class="section">
 
 <div class="container">
 
-<div class="section-header">
+<div class="section-title">
 
-<div>
-
-<div class="eyebrow">
-    Getting Started
-</div>
-
-<h2>
-    Start in four steps.
-</h2>
+<h2>Frequently Asked <span>Questions</span></h2>
 
 </div>
-
-</div>
-
-
-<div class="steps">
-
-
-<div class="step reveal">
-
-<div class="step-number">
-    01
-</div>
-
-<h3>
-    Create Account
-</h3>
-
-<p>
-    Submit your registration information.
-</p>
-
-</div>
-
-
-<div class="step reveal">
-
-<div class="step-number">
-    02
-</div>
-
-<h3>
-    Verify
-</h3>
-
-<p>
-    Complete applicable identity
-    verification requirements.
-</p>
-
-</div>
-
-
-<div class="step reveal">
-
-<div class="step-number">
-    03
-</div>
-
-<h3>
-    Fund
-</h3>
-
-<p>
-    Use an approved funding method.
-</p>
-
-</div>
-
-
-<div class="step reveal">
-
-<div class="step-number">
-    04
-</div>
-
-<h3>
-    Trade
-</h3>
-
-<p>
-    Access available markets and
-    manage your risk.
-</p>
-
-</div>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     FAQ
-===================================================== -->
-
-<section class="section"
-         id="faq">
-
-<div class="container">
-
-<div class="section-header">
-
-<div>
-
-<div class="eyebrow">
-    FAQ
-</div>
-
-<h2>
-    Frequently asked questions.
-</h2>
-
-</div>
-
-</div>
-
 
 <div class="faq">
 
-
 <div class="faq-item">
 
-<button class="faq-question">
-
-<span>
-    What is ALI FX?
-</span>
-
-<span class="faq-icon">
-    +
-</span>
-
-</button>
+<div class="faq-question"
+onclick="toggleFaq(this)">
+What is ALI FX?
+<span>+</span>
+</div>
 
 <div class="faq-answer">
-
-ALI FX is presented through this website
-as a trading and financial-technology brand.
-Replace this description with your verified
-legal company information before launch.
-
+ALI FX is a trading-focused platform concept providing market
+resources, education and account services.
 </div>
 
 </div>
@@ -1814,25 +1281,15 @@ legal company information before launch.
 
 <div class="faq-item">
 
-<button class="faq-question">
-
-<span>
-    Which markets are available?
-</span>
-
-<span class="faq-icon">
-    +
-</span>
-
-</button>
+<div class="faq-question"
+onclick="toggleFaq(this)">
+Is trading risk-free?
+<span>+</span>
+</div>
 
 <div class="faq-answer">
-
-The website supports market categories
-including Forex, Metals, Indices and
-Commodities. Only publish instruments
-actually offered by ALI FX.
-
+No. Financial markets involve risk and losses can occur.
+Always understand the risks before trading.
 </div>
 
 </div>
@@ -1840,54 +1297,18 @@ actually offered by ALI FX.
 
 <div class="faq-item">
 
-<button class="faq-question">
-
-<span>
-    How do I open an account?
-</span>
-
-<span class="faq-icon">
-    +
-</span>
-
-</button>
+<div class="faq-question"
+onclick="toggleFaq(this)">
+Do you guarantee profits?
+<span>+</span>
+</div>
 
 <div class="faq-answer">
-
-Use the Open Account process and complete
-the applicable registration and verification
-requirements.
-
+No legitimate trading service can guarantee profits.
+Past performance does not guarantee future results.
 </div>
 
 </div>
-
-
-<div class="faq-item">
-
-<button class="faq-question">
-
-<span>
-    Is trading risk-free?
-</span>
-
-<span class="faq-icon">
-    +
-</span>
-
-</button>
-
-<div class="faq-answer">
-
-No. Leveraged financial trading involves
-significant risk. Losses can occur and
-nothing on this website is a guarantee
-of profit.
-
-</div>
-
-</div>
-
 
 </div>
 
@@ -1896,104 +1317,83 @@ of profit.
 </section>
 
 
-<!-- =====================================================
-     CONTACT
-===================================================== -->
+<!-- CONTACT -->
 
-<section class="section"
-         id="contact">
+<section id="contact" class="section">
 
 <div class="container">
 
-<div class="section-header">
+<div class="section-title">
 
-<div>
+<h2>Contact <span>ALI FX</span></h2>
 
-<div class="eyebrow">
-    Contact
-</div>
-
-<h2>
-    Let's talk.
-</h2>
+<p>Send us your enquiry.</p>
 
 </div>
+
+<div class="contact-grid">
+
+<div class="card">
+
+<h3>Get In Touch</h3>
+
+<br>
+
+<p>📍 Business Bay, Dubai, UAE</p>
+<p>📞 +971 50 000 0000</p>
+<p>✉ info@alifx.com</p>
+
+<br>
 
 <p>
-    Connect this form to your official
-    backend or email service before launch.
+For partnerships, account enquiries and business communication,
+please contact our team.
 </p>
 
 </div>
 
 
-<div class="contact">
+<div class="card">
 
+<form onsubmit="submitContact(event)">
 
-<div class="contact-box reveal">
+<div class="form-group">
 
-<h3>
-    ALI FX
-</h3>
+<label>Name</label>
 
-<p>
-    Global Markets & Trading Technology
-</p>
-
-<p>
-    <b>Email</b>
-    <br>
-    support@alifx.com
-</p>
-
-<p>
-    <b>Office</b>
-    <br>
-    Your official business address
-</p>
-
-<a href="mailto:support@alifx.com"
-   class="btn btn-primary">
-    Email ALI FX
-</a>
+<input id="contactName"
+required
+placeholder="Your name">
 
 </div>
 
 
-<form class="contact-form reveal"
-      id="contactForm">
+<div class="form-group">
 
-<input
-    class="form-field"
-    type="text"
-    placeholder="Full Name"
-    required
->
+<label>Email</label>
 
-<input
-    class="form-field"
-    type="email"
-    placeholder="Email Address"
-    required
->
+<input id="contactEmail"
+type="email"
+required
+placeholder="your@email.com">
 
-<input
-    class="form-field"
-    type="tel"
-    placeholder="Phone Number"
->
+</div>
 
-<textarea
-    class="form-field"
-    placeholder="How can we help?"
-></textarea>
 
-<button
-    type="submit"
-    class="btn btn-primary">
+<div class="form-group">
 
+<label>Message</label>
+
+<textarea id="contactMessage"
+rows="5"
+required
+placeholder="Your message"></textarea>
+
+</div>
+
+<button class="btn btn-gold"
+type="submit">
 Send Message
-
 </button>
 
 </form>
@@ -2002,107 +1402,91 @@ Send Message
 
 </div>
 
+</div>
+
 </section>
 
 
-<!-- =====================================================
-     CTA
-===================================================== -->
-
-<div class="container">
-
-<div class="cta reveal">
-
-<div class="eyebrow">
-    Start Your Journey
-</div>
-
-<h2>
-    Ready to explore global markets?
-</h2>
-
-<p>
-    Discover the ALI FX trading experience.
-</p>
-
-<a href="#contact"
-   class="btn btn-primary">
-    Open an Account
-</a>
-
-</div>
-
-</div>
-
-</main>
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
+<!-- FOOTER -->
 
 <footer>
 
 <div class="container">
 
-<div class="risk-warning">
+<div class="footer-grid">
 
-<strong>
-    Risk Warning:
-</strong>
+<div class="footer-col">
 
-Trading leveraged financial products
-carries a high level of risk and may not
-be suitable for all investors. You may
-lose money. Past performance does not
-guarantee future results.
+<h3 class="logo">
+ALI <span>FX</span>
+</h3>
 
-<br><br>
+<br>
 
-This website template contains placeholder
-commercial, regulatory and company information.
-Before publication, replace all placeholders
-with ALI FX's verified legal entity details,
-licensing information where applicable,
-trading conditions, payment methods,
-official address and applicable policies.
+<p>
+Professional trading environment, market education
+and structured trading resources.
+</p>
 
-<br><br>
+</div>
 
-*Availability of Islamic accounts, instruments,
-platforms, leverage, spreads and other services
-is subject to the actual terms and conditions
-of ALI FX.
+
+<div class="footer-col">
+
+<h4>Company</h4>
+
+<a href="#" onclick="goHome('home');return false;">Home</a>
+
+<a href="#" onclick="goHome('education');return false;">
+Education
+</a>
+
+<a href="#" onclick="goHome('contact');return false;">
+Contact
+</a>
+
+</div>
+
+
+<div class="footer-col">
+
+<h4>Trading</h4>
+
+<a href="#" onclick="goHome('markets');return false;">
+Markets
+</a>
+
+<a href="#" onclick="goHome('accounts');return false;">
+Accounts
+</a>
+
+<a href="#" onclick="goHome('platforms');return false;">
+Platforms
+</a>
+
+</div>
+
+
+<div class="footer-col">
+
+<h4>Account</h4>
+
+<a href="#" onclick="showScreen('loginScreen');return false;">
+Login
+</a>
+
+<a href="#" onclick="openRegister();return false;">
+Open Account
+</a>
+
+</div>
 
 </div>
 
 
 <div class="footer-bottom">
 
-<div>
-    © <span id="year"></span> ALI FX.
-    All Rights Reserved.
-</div>
-
-<div class="footer-links">
-
-<a href="#">
-    Privacy Policy
-</a>
-
-<a href="#">
-    Terms & Conditions
-</a>
-
-<a href="#">
-    Risk Disclosure
-</a>
-
-<a href="#">
-    KYC / AML
-</a>
-
-</div>
+© 2026 ALI FX. All rights reserved.
 
 </div>
 
@@ -2110,198 +1494,1532 @@ of ALI FX.
 
 </footer>
 
+</section>
 
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
+
+<!-- =========================================================
+LOGIN SCREEN
+========================================================= -->
+
+<section id="loginScreen" class="screen">
+
+<div class="auth-screen">
+
+<div class="auth-card">
+
+<div class="auth-logo">
+ALI <span>FX</span>
+</div>
+
+<h2>Client Login</h2>
+
+<p class="subtitle">
+Access your trading account
+</p>
+
+<form onsubmit="clientLogin(event)">
+
+<div class="form-group">
+
+<label>Email</label>
+
+<input
+id="loginEmail"
+type="email"
+required
+placeholder="Enter email">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Password</label>
+
+<input
+id="loginPassword"
+type="password"
+required
+placeholder="Enter password">
+
+</div>
+
+
+<button class="btn btn-gold"
+style="width:100%"
+type="submit">
+Login
+</button>
+
+</form>
+
+
+<div class="auth-footer">
+
+Don't have an account?
+
+<button onclick="openRegister()">
+Create Account
+</button>
+
+<br><br>
+
+<button onclick="showScreen('homeScreen')">
+← Back to Website
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+REGISTER SCREEN
+========================================================= -->
+
+<section id="registerScreen" class="screen">
+
+<div class="auth-screen">
+
+<div class="auth-card">
+
+<div class="auth-logo">
+ALI <span>FX</span>
+</div>
+
+<h2>Create Account</h2>
+
+<p class="subtitle">
+Register your client profile
+</p>
+
+<form onsubmit="registerClient(event)">
+
+<div class="form-group">
+
+<label>Full Name</label>
+
+<input
+id="registerName"
+required
+placeholder="Full name">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Email</label>
+
+<input
+id="registerEmail"
+type="email"
+required
+placeholder="Email address">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Phone</label>
+
+<input
+id="registerPhone"
+required
+placeholder="Phone number">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Account Type</label>
+
+<select id="registerAccount">
+
+<option value="Standard">
+Standard
+</option>
+
+<option value="Professional">
+Professional
+</option>
+
+<option value="Institutional">
+Institutional
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Password</label>
+
+<input
+id="registerPassword"
+type="password"
+minlength="6"
+required
+placeholder="Minimum 6 characters">
+
+</div>
+
+
+<button class="btn btn-gold"
+style="width:100%"
+type="submit">
+Create Account
+</button>
+
+</form>
+
+
+<div class="auth-footer">
+
+Already have an account?
+
+<button onclick="showScreen('loginScreen')">
+Login
+</button>
+
+<br><br>
+
+<button onclick="showScreen('homeScreen')">
+← Back to Website
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+CLIENT DASHBOARD
+========================================================= -->
+
+<section id="clientDashboard" class="screen">
+
+<div class="dashboard">
+
+<nav class="dashboard-nav">
+
+<div class="container dashboard-nav-inner">
+
+<strong class="logo">
+ALI <span>FX</span>
+</strong>
+
+<a href="#"
+onclick="clientSection('overview');return false;">
+Dashboard
+</a>
+
+<a href="#"
+onclick="clientSection('profile');return false;">
+Profile
+</a>
+
+<a href="#"
+onclick="clientSection('kyc');return false;">
+KYC
+</a>
+
+<a href="#"
+onclick="clientSection('trading');return false;">
+Trading Account
+</a>
+
+<a href="#"
+onclick="clientSection('transactions');return false;">
+Transactions
+</a>
+
+<a href="#"
+onclick="clientSection('deposits');return false;">
+Deposits
+</a>
+
+<a href="#"
+onclick="clientSection('withdrawals');return false;">
+Withdrawals
+</a>
+
+<a href="#"
+onclick="clientSection('support');return false;">
+Support
+</a>
+
+<button class="logout"
+onclick="clientLogout()">
+Logout
+</button>
+
+</div>
+
+</nav>
+
+
+<div class="container dashboard-content">
+
+<div class="dashboard-title">
+
+<h1 id="clientWelcome">
+Client Dashboard
+</h1>
+
+<p>
+Manage your account and trading information.
+</p>
+
+</div>
+
+
+<div id="clientOverview">
+
+<div class="stats-grid">
+
+<div class="stat-card">
+
+<p>Account Status</p>
+
+<h2>Active</h2>
+
+</div>
+
+<div class="stat-card">
+
+<p>Trading Account</p>
+
+<h2>Pending</h2>
+
+</div>
+
+<div class="stat-card">
+
+<p>KYC Status</p>
+
+<h2>Pending</h2>
+
+</div>
+
+<div class="stat-card">
+
+<p>Account Type</p>
+
+<h2 id="clientAccountType">
+Standard
+</h2>
+
+</div>
+
+</div>
+
+
+<div class="dashboard-panel">
+
+<h3>Welcome to ALI FX</h3>
+
+<p style="color:#999">
+Your client dashboard is ready. Complete your profile and KYC
+requirements before using any live financial service.
+</p>
+
+</div>
+
+</div>
+
+
+<div id="clientProfile" class="dashboard-panel">
+
+<h3>Profile</h3>
+
+<p>
+Name:
+<strong id="profileName">—</strong>
+</p>
+
+<p>
+Email:
+<strong id="profileEmail">—</strong>
+</p>
+
+<p>
+Phone:
+<strong id="profilePhone">—</strong>
+</p>
+
+</div>
+
+
+<div id="clientKyc" class="dashboard-panel">
+
+<h3>KYC Verification</h3>
+
+<p style="color:#999;margin-bottom:15px;">
+KYC status: <span class="status pending">Pending</span>
+</p>
+
+<button class="btn btn-gold"
+onclick="alert('KYC module will be connected to the backend.')">
+Complete KYC
+</button>
+
+</div>
+
+
+<div id="clientTrading" class="dashboard-panel">
+
+<h3>Trading Account</h3>
+
+<table class="data-table">
+
+<tr>
+<th>Account</th>
+<th>Status</th>
+<th>Platform</th>
+</tr>
+
+<tr>
+<td>Primary Trading Account</td>
+<td><span class="status pending">Pending</span></td>
+<td>MT5 / Web</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<div id="clientTransactions" class="dashboard-panel">
+
+<h3>Transactions</h3>
+
+<p style="color:#888;">
+No transactions available.
+</p>
+
+</div>
+
+
+<div id="clientDeposits" class="dashboard-panel">
+
+<h3>Deposits</h3>
+
+<p style="color:#888;">
+Deposit functionality will be connected to the secure backend.
+</p>
+
+</div>
+
+
+<div id="clientWithdrawals" class="dashboard-panel">
+
+<h3>Withdrawals</h3>
+
+<p style="color:#888;">
+Withdrawal functionality will be connected to the secure backend.
+</p>
+
+</div>
+
+
+<div id="clientSupport" class="dashboard-panel">
+
+<h3>Support</h3>
+
+<p style="color:#888;">
+For support enquiries, contact the ALI FX team.
+</p>
+
+<br>
+
+<button class="btn btn-outline"
+onclick="goHome('contact')">
+Contact Support
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+ADMIN LOGIN
+========================================================= -->
+
+<section id="adminLoginScreen" class="screen">
+
+<div class="auth-screen">
+
+<div class="auth-card">
+
+<div class="auth-logo">
+ALI <span>FX</span>
+</div>
+
+<h2>Admin Login</h2>
+
+<p class="subtitle">
+Authorized administration access
+</p>
+
+<form onsubmit="adminLogin(event)">
+
+<div class="form-group">
+
+<label>Email</label>
+
+<input
+id="adminEmail"
+type="email"
+required
+placeholder="Admin email">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Password</label>
+
+<input
+id="adminPassword"
+type="password"
+required
+placeholder="Admin password">
+
+</div>
+
+
+<button class="btn btn-gold"
+style="width:100%"
+type="submit">
+Admin Login
+</button>
+
+</form>
+
+
+<div class="auth-footer">
+
+<button onclick="showScreen('homeScreen')">
+← Back to Website
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+ADMIN DASHBOARD
+========================================================= -->
+
+<section id="adminDashboard" class="screen">
+
+<div class="dashboard">
+
+<nav class="dashboard-nav">
+
+<div class="container dashboard-nav-inner">
+
+<strong class="logo">
+ALI <span>FX</span>
+</strong>
+
+<a href="#"
+onclick="adminSection('adminOverview');return false;">
+Dashboard
+</a>
+
+<a href="#"
+onclick="adminSection('adminClients');return false;">
+Clients
+</a>
+
+<a href="#"
+onclick="adminSection('adminKyc');return false;">
+KYC
+</a>
+
+<a href="#"
+onclick="adminSection('adminDeposits');return false;">
+Deposits
+</a>
+
+<a href="#"
+onclick="adminSection('adminWithdrawals');return false;">
+Withdrawals
+</a>
+
+<a href="#"
+onclick="adminSection('adminTrading');return false;">
+Trading Accounts
+</a>
+
+<a href="#"
+onclick="adminSection('adminSupport');return false;">
+Support
+</a>
+
+<a href="#"
+onclick="adminSection('adminAudit');return false;">
+Audit Logs
+</a>
+
+<button class="logout"
+onclick="adminLogout()">
+Logout
+</button>
+
+</div>
+
+</nav>
+
+
+<div class="container dashboard-content">
+
+<div class="dashboard-title">
+
+<h1>Admin Dashboard</h1>
+
+<p>
+Manage client information and platform operations.
+</p>
+
+</div>
+
+
+<div id="adminOverview">
+
+<div class="stats-grid">
+
+<div class="stat-card">
+
+<p>Total Clients</p>
+
+<h2 id="totalClients">0</h2>
+
+</div>
+
+<div class="stat-card">
+
+<p>Pending KYC</p>
+
+<h2>0</h2>
+
+</div>
+
+<div class="stat-card">
+
+<p>Pending Deposits</p>
+
+<h2>0</h2>
+
+</div>
+
+<div class="stat-card">
+
+<p>Trading Accounts</p>
+
+<h2>0</h2>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div id="adminClients" class="dashboard-panel">
+
+<h3>Registered Clients</h3>
+
+<div style="overflow-x:auto;">
+
+<table class="data-table">
+
+<thead>
+
+<tr>
+
+<th>Name</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Account</th>
+<th>Registered</th>
+
+</tr>
+
+</thead>
+
+<tbody id="clientTableBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<div id="adminKyc" class="dashboard-panel">
+
+<h3>KYC Management</h3>
+
+<p style="color:#888;">
+No pending KYC records in this frontend demo.
+</p>
+
+</div>
+
+
+<div id="adminDeposits" class="dashboard-panel">
+
+<h3>Deposit Management</h3>
+
+<p style="color:#888;">
+No deposit records available.
+</p>
+
+</div>
+
+
+<div id="adminWithdrawals" class="dashboard-panel">
+
+<h3>Withdrawal Management</h3>
+
+<p style="color:#888;">
+No withdrawal records available.
+</p>
+
+</div>
+
+
+<div id="adminTrading" class="dashboard-panel">
+
+<h3>Trading Accounts</h3>
+
+<p style="color:#888;">
+Trading account management will be connected to the backend.
+</p>
+
+</div>
+
+
+<div id="adminSupport" class="dashboard-panel">
+
+<h3>Support Requests</h3>
+
+<p style="color:#888;">
+No support requests available.
+</p>
+
+</div>
+
+
+<div id="adminAudit" class="dashboard-panel">
+
+<h3>Audit Logs</h3>
+
+<p style="color:#888;">
+Frontend demo audit logs are not available.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
 
 <script>
 
-/* ---------------------------------------------------------
-   Fake visual market chart
---------------------------------------------------------- */
+/* =========================================================
+SCREEN MANAGEMENT
+========================================================= */
 
-const chart =
-    document.getElementById("marketChart");
+function showScreen(id){
 
-for (let i = 0; i < 38; i++) {
+    document.querySelectorAll(".screen").forEach(screen=>{
+        screen.classList.remove("active");
+    });
 
-    const candle =
-        document.createElement("div");
+    const target=document.getElementById(id);
 
-    candle.className = "candle";
-
-    candle.style.height =
-        (40 + Math.random() * 145) + "px";
-
-    chart.appendChild(candle);
+    if(target){
+        target.classList.add("active");
+        window.scrollTo(0,0);
+    }
 }
 
 
-/* ---------------------------------------------------------
-   Account Selection Switcher
---------------------------------------------------------- */
+/* =========================================================
+HOME NAVIGATION
+========================================================= */
 
-const accountCards = document.querySelectorAll(".accounts .account");
+function goHome(section){
 
-accountCards.forEach(card => {
-    card.addEventListener("click", () => {
-        accountCards.forEach(c => {
-            c.classList.remove("selected");
-            const btn = c.querySelector(".btn-select");
-            if(btn) btn.textContent = "Select Account";
+    showScreen("homeScreen");
+
+    setTimeout(()=>{
+
+        const element=document.getElementById(section);
+
+        if(element){
+
+            const offset=80;
+
+            const top=
+                element.getBoundingClientRect().top
+                +window.pageYOffset
+                -offset;
+
+            window.scrollTo({
+                top:top,
+                behavior:"smooth"
+            });
+
+        }
+
+    },100);
+
+}
+
+
+/* =========================================================
+MOBILE NAVBAR
+========================================================= */
+
+function toggleMobileMenu(){
+
+    const menu=document.getElementById("mobileNav");
+
+    menu.classList.toggle("open");
+
+}
+
+
+function closeMobileMenu(){
+
+    const menu=document.getElementById("mobileNav");
+
+    menu.classList.remove("open");
+
+}
+
+
+/* =========================================================
+REGISTER
+========================================================= */
+
+function openRegister(account){
+
+    showScreen("registerScreen");
+
+    if(account){
+
+        document.getElementById("registerAccount").value=account;
+
+    }
+
+}
+
+
+/* =========================================================
+PASSWORD HASH
+========================================================= */
+
+async function hashPassword(password){
+
+    const data=
+        new TextEncoder().encode(password);
+
+    const hash=
+        await crypto.subtle.digest("SHA-256",data);
+
+    return Array.from(
+        new Uint8Array(hash)
+    )
+    .map(b=>b.toString(16).padStart(2,"0"))
+    .join("");
+
+}
+
+
+/* =========================================================
+CLIENT REGISTER
+========================================================= */
+
+async function registerClient(event){
+
+    event.preventDefault();
+
+    const name=
+        document.getElementById("registerName").value.trim();
+
+    const email=
+        document.getElementById("registerEmail").value.trim().toLowerCase();
+
+    const phone=
+        document.getElementById("registerPhone").value.trim();
+
+    const account=
+        document.getElementById("registerAccount").value;
+
+    const password=
+        document.getElementById("registerPassword").value;
+
+
+    let users=
+        JSON.parse(localStorage.getItem("ALIFX_USERS") || "[]");
+
+
+    const existing=
+        users.find(user=>user.email===email);
+
+
+    if(existing){
+
+        alert("An account with this email already exists.");
+
+        return;
+
+    }
+
+
+    const passwordHash=
+        await hashPassword(password);
+
+
+    const user={
+
+        id:"USR-"+Date.now(),
+
+        name:name,
+
+        email:email,
+
+        phone:phone,
+
+        account:account,
+
+        passwordHash:passwordHash,
+
+        registeredAt:new Date().toLocaleString()
+
+    };
+
+
+    users.push(user);
+
+    localStorage.setItem(
+        "ALIFX_USERS",
+        JSON.stringify(users)
+    );
+
+
+    localStorage.setItem(
+        "ALIFX_CLIENT_SESSION",
+        user.id
+    );
+
+
+    alert("Account created successfully.");
+
+    loadClientDashboard();
+
+    showScreen("clientDashboard");
+
+}
+
+
+/* =========================================================
+CLIENT LOGIN
+========================================================= */
+
+async function clientLogin(event){
+
+    event.preventDefault();
+
+
+    const email=
+        document.getElementById("loginEmail")
+        .value.trim()
+        .toLowerCase();
+
+
+    const password=
+        document.getElementById("loginPassword")
+        .value;
+
+
+    const users=
+        JSON.parse(
+            localStorage.getItem("ALIFX_USERS") || "[]"
+        );
+
+
+    const user=
+        users.find(u=>u.email===email);
+
+
+    if(!user){
+
+        alert("Invalid email or password.");
+
+        return;
+
+    }
+
+
+    const hash=
+        await hashPassword(password);
+
+
+    if(hash!==user.passwordHash){
+
+        alert("Invalid email or password.");
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        "ALIFX_CLIENT_SESSION",
+        user.id
+    );
+
+
+    loadClientDashboard();
+
+    showScreen("clientDashboard");
+
+}
+
+
+/* =========================================================
+CLIENT DASHBOARD
+========================================================= */
+
+function loadClientDashboard(){
+
+    const session=
+        localStorage.getItem("ALIFX_CLIENT_SESSION");
+
+
+    const users=
+        JSON.parse(
+            localStorage.getItem("ALIFX_USERS") || "[]"
+        );
+
+
+    const user=
+        users.find(u=>u.id===session);
+
+
+    if(!user){
+
+        showScreen("loginScreen");
+
+        return;
+
+    }
+
+
+    document.getElementById("clientWelcome")
+        .textContent=
+        "Welcome, "+user.name;
+
+
+    document.getElementById("clientAccountType")
+        .textContent=
+        user.account;
+
+
+    document.getElementById("profileName")
+        .textContent=
+        user.name;
+
+
+    document.getElementById("profileEmail")
+        .textContent=
+        user.email;
+
+
+    document.getElementById("profilePhone")
+        .textContent=
+        user.phone;
+
+
+    hideClientPanels();
+
+    document.getElementById("clientOverview")
+        .style.display="block";
+
+}
+
+
+function hideClientPanels(){
+
+    [
+        "clientOverview",
+        "clientProfile",
+        "clientKyc",
+        "clientTrading",
+        "clientTransactions",
+        "clientDeposits",
+        "clientWithdrawals",
+        "clientSupport"
+
+    ].forEach(id=>{
+
+        const el=document.getElementById(id);
+
+        if(el){
+            el.style.display="none";
+        }
+
+    });
+
+}
+
+
+function clientSection(section){
+
+    hideClientPanels();
+
+
+    const map={
+
+        overview:"clientOverview",
+        profile:"clientProfile",
+        kyc:"clientKyc",
+        trading:"clientTrading",
+        transactions:"clientTransactions",
+        deposits:"clientDeposits",
+        withdrawals:"clientWithdrawals",
+        support:"clientSupport"
+
+    };
+
+
+    const element=
+        document.getElementById(map[section]);
+
+
+    if(element){
+
+        element.style.display="block";
+
+        element.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
         });
 
-        card.classList.add("selected");
-        const activeBtn = card.querySelector(".btn-select");
-        if(activeBtn) activeBtn.textContent = "Selected";
+    }
+
+}
+
+
+/* =========================================================
+CLIENT LOGOUT
+========================================================= */
+
+function clientLogout(){
+
+    localStorage.removeItem(
+        "ALIFX_CLIENT_SESSION"
+    );
+
+    showScreen("homeScreen");
+
+}
+
+
+/* =========================================================
+ADMIN LOGIN
+========================================================= */
+
+function adminLogin(event){
+
+    event.preventDefault();
+
+
+    const email=
+        document.getElementById("adminEmail").value.trim();
+
+
+    const password=
+        document.getElementById("adminPassword").value;
+
+
+    /*
+      FRONTEND DEMO ONLY.
+
+      Do NOT use this authentication method
+      for a production financial platform.
+    */
+
+
+    if(!email || !password){
+
+        alert("Enter admin credentials.");
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        "ALIFX_ADMIN_SESSION",
+        "active"
+    );
+
+
+    loadAdminDashboard();
+
+    showScreen("adminDashboard");
+
+}
+
+
+/* =========================================================
+ADMIN DASHBOARD
+========================================================= */
+
+function loadAdminDashboard(){
+
+    const users=
+        JSON.parse(
+            localStorage.getItem("ALIFX_USERS") || "[]"
+        );
+
+
+    document.getElementById("totalClients")
+        .textContent=users.length;
+
+
+    const tbody=
+        document.getElementById("clientTableBody");
+
+
+    tbody.innerHTML="";
+
+
+    if(users.length===0){
+
+        tbody.innerHTML=`
+
+        <tr>
+
+        <td colspan="5"
+        style="color:#777;text-align:center;">
+
+        No registered clients.
+
+        </td>
+
+        </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    users.forEach(user=>{
+
+        const row=
+            document.createElement("tr");
+
+
+        row.innerHTML=`
+
+        <td>${escapeHtml(user.name)}</td>
+
+        <td>${escapeHtml(user.email)}</td>
+
+        <td>${escapeHtml(user.phone)}</td>
+
+        <td>${escapeHtml(user.account)}</td>
+
+        <td>${escapeHtml(user.registeredAt)}</td>
+
+        `;
+
+
+        tbody.appendChild(row);
+
     });
-});
+
+}
 
 
-/* ---------------------------------------------------------
-   FAQ
---------------------------------------------------------- */
+function escapeHtml(value){
 
-document
-.querySelectorAll(".faq-question")
-.forEach(button => {
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
-    button.addEventListener("click", () => {
+}
 
-        const item =
-            button.parentElement;
 
-        item.classList.toggle("active");
+/* =========================================================
+ADMIN SECTION
+========================================================= */
+
+function adminSection(section){
+
+    const sections=[
+
+        "adminOverview",
+        "adminClients",
+        "adminKyc",
+        "adminDeposits",
+        "adminWithdrawals",
+        "adminTrading",
+        "adminSupport",
+        "adminAudit"
+
+    ];
+
+
+    sections.forEach(id=>{
+
+        const element=
+            document.getElementById(id);
+
+        if(element){
+
+            element.style.display="none";
+
+        }
 
     });
 
-});
+
+    const element=
+        document.getElementById(section);
 
 
-/* ---------------------------------------------------------
-   Mobile menu
---------------------------------------------------------- */
+    if(element){
 
-const menu =
-    document.querySelector(".mobile-menu");
+        element.style.display="block";
 
-const nav =
-    document.querySelector(".nav-links");
+        element.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
 
-menu.addEventListener("click", () => {
+    }
 
-    if (nav.style.display === "flex") {
+}
 
-        nav.style.display = "none";
 
-    } else {
+/* =========================================================
+ADMIN LOGOUT
+========================================================= */
 
-        nav.style.display = "flex";
+function adminLogout(){
 
-        nav.style.position = "absolute";
+    localStorage.removeItem(
+        "ALIFX_ADMIN_SESSION"
+    );
 
-        nav.style.top = "68px";
+    showScreen("homeScreen");
 
-        nav.style.left = "0";
+}
 
-        nav.style.right = "0";
 
-        nav.style.padding = "20px";
+/* =========================================================
+FAQ
+========================================================= */
 
-        nav.style.flexDirection = "column";
+function toggleFaq(element){
 
-        nav.style.background = "#070b11";
+    const item=
+        element.parentElement;
+
+    item.classList.toggle("open");
+
+}
+
+
+/* =========================================================
+CONTACT
+========================================================= */
+
+function submitContact(event){
+
+    event.preventDefault();
+
+    alert(
+        "Thank you. Your enquiry has been received."
+    );
+
+    event.target.reset();
+
+}
+
+
+/* =========================================================
+GOLD CHART
+========================================================= */
+
+const chartCanvas=
+    document.getElementById("goldChart");
+
+
+if(chartCanvas){
+
+    const ctx=
+        chartCanvas.getContext("2d");
+
+
+    new Chart(ctx,{
+
+        type:"line",
+
+        data:{
+
+            labels:[
+                "09:00",
+                "10:00",
+                "11:00",
+                "12:00",
+                "13:00",
+                "14:00",
+                "15:00",
+                "16:00"
+            ],
+
+            datasets:[{
+
+                label:"XAU/USD",
+
+                data:[
+                    4162,
+                    4171,
+                    4168,
+                    4180,
+                    4175,
+                    4188,
+                    4183,
+                    4190
+                ],
+
+                borderColor:"#d4af37",
+
+                backgroundColor:
+                    "rgba(212,175,55,.08)",
+
+                fill:true,
+
+                tension:.35,
+
+                pointRadius:3
+
+            }]
+
+        },
+
+        options:{
+
+            responsive:true,
+
+            maintainAspectRatio:false,
+
+            plugins:{
+
+                legend:{
+                    labels:{
+                        color:"#aaa"
+                    }
+                }
+
+            },
+
+            scales:{
+
+                x:{
+                    ticks:{
+                        color:"#777"
+                    },
+
+                    grid:{
+                        color:"#1e1e1e"
+                    }
+
+                },
+
+                y:{
+                    ticks:{
+                        color:"#777"
+                    },
+
+                    grid:{
+                        color:"#1e1e1e"
+                    }
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+PAGE LOAD
+========================================================= */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    const clientSession=
+        localStorage.getItem(
+            "ALIFX_CLIENT_SESSION"
+        );
+
+
+    if(clientSession){
+
+        loadClientDashboard();
 
     }
 
 });
-
-
-/* ---------------------------------------------------------
-   Close mobile menu after clicking link
---------------------------------------------------------- */
-
-document
-.querySelectorAll(".nav-links a")
-.forEach(link => {
-
-    link.addEventListener("click", () => {
-
-        if (window.innerWidth <= 950) {
-
-            nav.style.display = "none";
-
-        }
-
-    });
-
-});
-
-
-/* ---------------------------------------------------------
-   Scroll reveal
---------------------------------------------------------- */
-
-const observer =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(entry => {
-
-                if (entry.isIntersecting) {
-
-                    entry.target
-                        .classList
-                        .add("visible");
-
-                }
-
-            });
-
-        },
-        {
-            threshold: .12
-        }
-    );
-
-
-document
-.querySelectorAll(".reveal")
-.forEach(element => {
-
-    observer.observe(element);
-
-});
-
-
-/* ---------------------------------------------------------
-   Contact demo form
---------------------------------------------------------- */
-
-document
-.getElementById("contactForm")
-.addEventListener("submit", function(e) {
-
-    e.preventDefault();
-
-    alert(
-        "Thank you. The ALI FX contact form is currently in demo mode. Connect it to your backend/email service before launch."
-    );
-
-    this.reset();
-
-});
-
-
-/* ---------------------------------------------------------
-   Current year
---------------------------------------------------------- */
-
-document
-.getElementById("year")
-.textContent =
-    new Date().getFullYear();
 
 </script>
 
